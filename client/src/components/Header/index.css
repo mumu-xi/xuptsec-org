@@ -1,0 +1,17 @@
+.header {
+  width: 100vw;
+  height: 45px;
+  background: #404040;
+  display: flex;
+  justify-content: space-between;
+}
+.logo {
+  width: 45px;
+  height: 45px;
+  background: url(../../../public/logo.png);
+  background-size: contain;
+  margin-left: 20px;
+}
+.menu {
+  margin-right: 20px;
+}

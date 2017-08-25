@@ -1,0 +1,8 @@
+# Ignore installed node modules
+node_modules
+
+# Ignore final files
+dist
+
+# Ignore logs
+npm-debug.log

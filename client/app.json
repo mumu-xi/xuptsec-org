@@ -1,0 +1,20 @@
+{
+  "name": "react",
+  "description": "A React app using Express",
+  "keywords": [
+    "node",
+    "react",
+    "express",
+    "less",
+    "antd"
+  ],
+  "website": "http://xuptsec.top",
+  "repository": "https://git@github.com:mumu-xi/xuptsec-org.git",
+  "success_url": "/",
+  "env": {
+    "PORT": {
+      "description": "Port on which express is running.",
+      "value": "443"
+    }
+  }
+}
