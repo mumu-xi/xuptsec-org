@@ -1,6 +1,6 @@
 .homeWrapper {
   width: 100vw;
-  height: 74vh;
+
   overflow: hidden;
 }
 .home {
@@ -12,11 +12,27 @@
 
 }
 .welc{
-  font-size: 50px;
   letter-spacing: 10px;
   width: 100vw;
   text-align: center;
-  padding-top: 10%;
   color: #FFF;
   font-family: Helvetica,Arial,sans-serif;
 }
+	@media screen and (min-width:768px) {
+    .homeWrapper {
+      height: 74vh;
+    }
+    .welc {
+      padding-top: 14rem;
+      font-size: 50px;
+    }
+  }
+  @media screen and (max-width:768px) {
+    .homeWrapper {
+      height: 79vh;
+    }
+    .welc {
+      padding-top: 10rem;
+      font-size: 40px;
+    }
+  }

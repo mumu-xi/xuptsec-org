@@ -15,16 +15,16 @@ export default class extends Component {
       link: '/joinUs',
       children: [{
         text: '纳新要求',
-        link: 'joinUs/require'
+        link: 'require'
       }, {
         text: '纳新报名',
-        link: 'joinUs/signUp'
+        link: 'signUp'
       }, {
         text: '面试题',
-        link: 'joinUs/interview'
+        link: 'interview'
       }, {
         text: '免试题',
-        link: 'joinUs/free'
+        link: 'free'
       }]
     }, {
       text: 'About us',
