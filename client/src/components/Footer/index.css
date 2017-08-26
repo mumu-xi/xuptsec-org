@@ -1,0 +1,26 @@
+.footer{
+  width: 100vw;
+  height: 20vh;
+  display: flex;
+	justify-content: space-around;
+	align-items: center;
+	background-color: #404040;
+  position: fixed;
+  bottom: 0;
+	text-align: center;
+	font-size: 13px;
+	color: #FFF;
+}
+.copyRight{
+  margin-top: 100px;
+  flex-grow: 1;
+  text-align: right;
+}
+.qrWrapper {
+  flex-grow: 1;
+}
+.qr{
+	width: 90px;
+	height: 90px;
+  margin-top: 10px;
+}

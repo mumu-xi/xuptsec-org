@@ -1,0 +1,22 @@
+.homeWrapper {
+  width: 100vw;
+  height: 74vh;
+  overflow: hidden;
+}
+.home {
+  width: 150%;
+  height: 125%;
+  background: url(../../../public/home-bg.png);
+  background-size: cover;
+  background-position: 50% 50%;
+
+}
+.welc{
+  font-size: 50px;
+  letter-spacing: 10px;
+  width: 100vw;
+  text-align: center;
+  padding-top: 10%;
+  color: #FFF;
+  font-family: Helvetica,Arial,sans-serif;
+}

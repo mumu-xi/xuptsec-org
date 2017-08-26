@@ -1,9 +1,10 @@
 .header {
   width: 100vw;
-  height: 45px;
+  height: 6vh;
   background: #404040;
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
 }
 .logo {
   width: 45px;

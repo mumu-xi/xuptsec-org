@@ -1,26 +1,16 @@
 import React, { Component } from 'react';
-// import { Layout, Menu } from 'antd';
+import styles from './index.css';
 
-// const { Content } = Layout;
 export default class extends Component {
-  // const menus = [{
-  //   text: 'Home',
-  //   Link: '/'
-  // },{
-  //   text: 'Join us',
-  //   Link: '/joinUs'
-  // },{
-  //   text: 'About us',
-  //   Link: '/aboutUs'
-  // },{
-  //   text: 'blog',
-  //   Link:'#' // 放博客链接
-  // }]
   render() {
     return (
-      <div>
-        footer
-      </div>
+      <footer className={styles.footer}>
+        <span className={styles.copyRight}>copyRight &copy; 2009-2017西安邮电大学信息安全实验室 All right reserved</span>
+        <div className={styles.qrWrapper}>
+          <p>关注我们</p>
+          <img className={styles.qr} src="../../../public/qrcode.png" alt="QR" />
+        </div>
+      </footer>
     );
   }
 }
