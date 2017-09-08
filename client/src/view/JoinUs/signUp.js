@@ -9,8 +9,8 @@ class Index extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <div className={styles.signUpWrapper}>
-        <h3 className={styles.signUp}>纳新报名</h3>
+      <div>
+        <h3 className={styles.title}>纳新报名</h3>
         <Form className={styles.form}>
           <FormItem >
             {getFieldDecorator('StudentName', {

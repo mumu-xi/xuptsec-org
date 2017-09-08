@@ -1,5 +1,4 @@
 .header {
-  width: 100vw;
   height: 6vh;
   background: #404040;
   display: flex;
@@ -15,7 +14,6 @@
 @media screen and (min-width:768px) {
   .header {
     justify-content: space-between;
-    align-items: flex-end;
   }
   .pcMenu {
     display: block;

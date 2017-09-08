@@ -20,6 +20,66 @@
 ```
    npm run build
 ```
-## 样式规范
+## 接口文档
+### 纳新报名
+```
+POST  json  url/api/signup
+请求示例：
+{
+  "stuName": "唐梦",
+  "stuSex": "女",
+  "stuClass": "信息对抗1401",
+  "stuNumber": "03146000",
+  "stuTel": "4567890222",
+  "stuGroup": "开发",
+  "stuIntro": "啦啦啦啦啦"
+}
+成功返回示例：
+{
+  "message": "请求成功",
+  "state":true,
+}
+失败返回示例：
+{
+   "message": "请求失败",
+   "state":false,
+}
+```
+
+### 后台管理登录
+```
+POST  json  url/api/login
+请求示例：
+{
+  "userName": "admin",
+  "passWord": "123456",
+}
+成功返回示例：
+{
+  "message": "请求成功",
+  "state":true,
+}
+失败返回示例：
+{
+   "message": "请求失败",
+   "state":false,
+}
+
+get  json  url/api/token
+请求示例：
+
+成功返回示例：
+{
+  "message": "请求成功",
+  "state":true,
+}
+失败返回示例：
+{
+   "message": "请求失败",
+   "state":false,
+}
+```
+
+
 
 

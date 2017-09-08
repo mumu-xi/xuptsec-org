@@ -41,17 +41,18 @@ export default class extends Component {
         { text: '免试题', link: 'free' }]
       },
       { text: 'About us',
-        link: 'aboutUs',
+        link: 'about',
         children: [
-        { text: '实验室简介', link: 'aboutUs/lab' },
-        { text: '成员简介', link: 'joinUs/people' },
-        { text: '开发组', link: 'aboutUs/open' },
-        { text: '安全组', link: 'aboutUs/safe' }]
+        { text: '实验室简介', link: 'about/lab' },
+        { text: '成员简介', link: 'about/people' },
+        { text: '开发组', link: 'about/development' },
+        { text: '安全组', link: 'about/security' }]
       },
       { text: 'blog', link: '#' }// 放博客链接
     ];
 
     const { route = '' } = this.props;
+    // console.log(this.props.route);
     return (
       <div className={styles.header}>
         <Link to="/"><div className={styles.logo} /></Link>
