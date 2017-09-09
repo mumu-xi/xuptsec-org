@@ -69,7 +69,9 @@ get json url/api/people
   "message":"请求失败",
   "state":false,
   "data":null
-}8
+}
+
+```
 ### 后台管理登录
 ```
 POST  json  url/api/admin/login
