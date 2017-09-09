@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- 配置整合MyBatis -->
+    <!-- 配置数据库相关参数 -->
+    <!-- properties的属性：${url} -->
+    <!-- 数据库连接池 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+
+        <!-- 基本属性driverClassName url、user、password -->
+        <property name="driverClassName" value = "${jdbc.driver}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="${jdbc.initialSize}" />
+        <property name="minIdle" value="${jdbc.minIdle}" />
+        <property name="maxActive" value="${jdbc.maxActive}" />
+
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="${jdbc.maxWait}" />
+
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}" />
+
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}" />
+
+        <property name="validationQuery" value="${jdbc.validationQuery}" />
+        <property name="testWhileIdle" value="${jdbc.testWhileIdle}" />
+        <property name="testOnBorrow" value="${jdbc.testOnBorrow}" />
+        <property name="testOnReturn" value="${jdbc.testOnReturn}" />
+
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="${jdbc.poolPreparedStatements}" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="${jdbc.maxPoolPreparedStatementPerConnectionSize}" />
+
+        <!-- 配置监控统计拦截的filters，去掉后监控界面sql无法统计 -->
+        <property name="filters" value="${jdbc.filters}" />
+    </bean>
+
+
+    <context:property-placeholder location="classpath:dbinfo.properties" ignore-unresolvable="true"/>
+
+
+
+    <!-- 3:配置SqlSessionFactory对象 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 注入数据库连接池 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 配置MyBatis全局配置文件 -->
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+        <!-- 扫描model包，使用别名cn.cnfia.dao.model -->
+        <property name="typeAliasesPackage" value="org.xuptsec.recruit.poji"/>
+        <!-- 扫描SQL配置文件：mapper需要的xml文件 -->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+    </bean>
+
+    <!-- 配置扫描Dao接口包，动态实现Dao接口，并注入到Spring容器中 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 注入sqlSessionFactory，防止提前错误的初始化 -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!-- 给出扫描DAO接口包 -->
+        <property name="basePackage" value="org.xuptsec.recruit.dao"/>
+        <!-- applicationcontext中beanfactory初始化需要 -->
+    </bean>
+</beans>

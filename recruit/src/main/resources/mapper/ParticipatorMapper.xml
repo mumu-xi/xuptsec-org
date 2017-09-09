@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//com.mapper.mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.xuptsec.recruit.dao.ParticipatorMapper">
+
+    <insert id="insertParticipator" parameterType="participator">
+        <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="stuId">
+            select uuid();
+        </selectKey>
+        insert into tb_participator (id,realname,gender,class,number,tel,classify,introduction)
+        value(#{stuId},#{stuName},#{stuSex},#{stuClass},#{stuNumber},#{stuTel},#{stuGroup},#{stuIntro})
+    </insert>
+    <select id="findParticipatorByPage" resultType="participator">
+        select * from tb_participator  limit ${pageNum},${pageSize}
+    </select>
+</mapper>
