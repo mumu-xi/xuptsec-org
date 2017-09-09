@@ -45,10 +45,33 @@ POST  json  url/api/signup
    "state":false,
 }
 ```
-
+### 成员简介
+get json url/api/people
+请求实例：
+{
+  class:'2014',
+  pageNum:'1',
+  pageSize:'10'
+}
+成功返回示例:
+{
+  "message":"请求成功",
+  "state":true,
+  "data":{
+    "picurl":"url",
+    "peopleName":"张三",
+    "peopleIntro":"多年深耕技术创业领域，在云计算、移动社交、多媒体处理等领域有着多年的技术积累..."
+  }
+}
+失败返回示例:
+{
+  "message":"请求失败",
+  "state":false,
+  "data":null
+}8
 ### 后台管理登录
 ```
-POST  json  url/api/login
+POST  json  url/api/admin/login
 请求示例：
 {
   "userName": "admin",
@@ -65,7 +88,7 @@ POST  json  url/api/login
    "state":false,
 }
 
-get  json  url/api/token
+get  json  url/api/admin/token
 请求示例：
 
 成功返回示例：
@@ -79,7 +102,6 @@ get  json  url/api/token
    "state":false,
 }
 ```
-
 
 
 
