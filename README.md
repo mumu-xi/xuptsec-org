@@ -46,6 +46,7 @@ POST  json  url/api/signup
 }
 ```
 ### 成员简介
+```
 get json url/api/people
 请求实例：
 {
