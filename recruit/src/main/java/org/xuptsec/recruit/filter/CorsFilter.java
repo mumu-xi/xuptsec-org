@@ -1,4 +1,4 @@
-package org.xuptsec.recruit.util;
+package org.xuptsec.recruit.filter;
 
 
 import org.slf4j.Logger;

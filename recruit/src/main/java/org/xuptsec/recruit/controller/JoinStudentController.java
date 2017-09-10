@@ -2,7 +2,9 @@ package org.xuptsec.recruit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.xuptsec.recruit.poji.Participator;
 import org.xuptsec.recruit.poji.ResultJoin;
@@ -25,14 +27,15 @@ public class JoinStudentController {
      */
     @RequestMapping(value="/insert"/*,method = RequestMethod.POST*/)
     public @ResponseBody
-    ResultJoin insertParticipator(Participator participator){
+    ResultJoin insertParticipator(@RequestBody Participator participator){
+        System.out.println("打印信息："+participator);
         return participatorService.insertParticipator(participator);
     }
 
     /**
      * 分页显示已经报名的学生信息
-     * @param pageNum
-     * @param pageSize
+     * @param pageNum 第几页
+     * @param pageSize 一张页面显示几条信息
      * @return
      */
     @RequestMapping("/find")

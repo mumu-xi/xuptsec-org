@@ -32,4 +32,17 @@
             <value>5242880</value>
         </property>
     </bean>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
+            </list>
+        </property>
+    </bean>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="org.xuptsec.recruit.filter.LoginFilter"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

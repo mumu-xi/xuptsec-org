@@ -15,18 +15,42 @@ import org.xuptsec.recruit.service.ParticipatorService;
 public class ParticipatorServiceImpl implements ParticipatorService {
     @Autowired
     private ParticipatorMapper participatorMapper;
+
     /**
      * 插入学生报名信息
+     *
      * @param participator
      * @return
      */
     public ResultJoin insertParticipator(Participator participator) {
         ResultJoin result = new ResultJoin();
+        StringBuilder sb = new StringBuilder();
         try {
+            //表单验证
+            if(participator==null){
+                sb.append("请求参数为空");
+            }
+            if (participator.getStuName().trim() == "")
+                sb.append("名字为空 ");
+            if (participator.getStuClass().trim() == "")
+                sb.append("班级为空 ");
+            if (participator.getStuGroup().trim() == "")
+                sb.append("选择组别为空 ");
+            if (participator.getStuNumber().trim() == "")
+                sb.append("学号为空 ");
+            if (participator.getStuSex().trim() == "")
+                sb.append("性别为空 ");
+            if (participator.getStuTel().trim() == "")
+                sb.append("电话为空 ");
+            if (participator.getStuIntro().trim() == "")
+                sb.append("个人介绍为空。");
+
             /*
              * 为了以后微信接入方便，获取表单时的 1 代表男，2 代表女，在此处转换为汉字
              */
-            participator.setStuSex("1".equals(participator.getStuSex().trim())?"男":"女");
+            String sex = participator.getStuSex().trim();
+            if ((sex == "1") || (sex == "2"))
+                participator.setStuSex("1".equals(sex) ? "男" : "女");
             participatorMapper.insertParticipator(participator);
             result.setState("true");
             result.setMessage("请求成功");
@@ -36,20 +60,26 @@ public class ParticipatorServiceImpl implements ParticipatorService {
 
             e.printStackTrace();
         } finally {
+            if (sb.toString() != "")
+                result.setMessage(sb.toString());
+            else
+                result.setMessage("请求成功");
+
             return result;
         }
-
     }
+
     /**
      * 查找所有学生报名信息
+     *
      * @return
      */
-    public ResultStudentList findParticipatorByPage(int pageNum,int pageSize){
+    public ResultStudentList findParticipatorByPage(int pageNum, int pageSize) {
         ResultStudentList result = new ResultStudentList();
         try {
 
 
-            result.setData(participatorMapper.findParticipatorByPage((pageNum-1)*pageSize,pageSize));
+            result.setData(participatorMapper.findParticipatorByPage((pageNum - 1) * pageSize, pageSize));
             result.setState("true");
             result.setMessage("请求成功");
         } catch (Exception e) {

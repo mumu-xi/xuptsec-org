@@ -15,7 +15,7 @@
     <!-- maven创建的servlet需要将版本修改为3.1 -->
     <!-- 配置DispatchServlet -->
     <servlet>
-        <servlet-name>sandias-portal-dispatcher</servlet-name>
+        <servlet-name>recruit-dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <!-- 配置SpringMVC需要加载的文件 -->
         <!-- spring-util.xml, spring-util.xml, spring-executor.xml -->
@@ -29,7 +29,7 @@
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>sandias-portal-dispatcher</servlet-name>
+        <servlet-name>recruit-dispatcher</servlet-name>
         <!-- 默认匹配所有的请求 -->
         <url-pattern>/</url-pattern>
     </servlet-mapping>
@@ -37,7 +37,7 @@
     <!--解决前后端跨域问题-->
     <filter>
         <filter-name>CorsFilter</filter-name>
-        <filter-class>org.xuptsec.recruit.util.CorsFilter</filter-class>
+        <filter-class>org.xuptsec.recruit.filter.CorsFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>CorsFilter</filter-name>
