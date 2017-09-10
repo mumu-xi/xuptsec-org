@@ -36,7 +36,7 @@ public class JoinStudentController {
      * @return
      */
     @RequestMapping("/find")
-    public @ResponseBody ResultStudentList findParticipator(String pageNum,String pageSize){
+    public @ResponseBody ResultStudentList findParticipator(int pageNum,int pageSize){
         return participatorService.findParticipatorByPage(pageNum,pageSize);
     }
 }

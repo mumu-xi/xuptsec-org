@@ -44,12 +44,12 @@ public class ParticipatorServiceImpl implements ParticipatorService {
      * 查找所有学生报名信息
      * @return
      */
-    public ResultStudentList findParticipatorByPage(String pageNum,String pageSize){
+    public ResultStudentList findParticipatorByPage(int pageNum,int pageSize){
         ResultStudentList result = new ResultStudentList();
         try {
 
 
-            result.setData(participatorMapper.findParticipatorByPage(pageNum,pageSize));
+            result.setData(participatorMapper.findParticipatorByPage((pageNum-1)*pageSize,pageSize));
             result.setState("true");
             result.setMessage("请求成功");
         } catch (Exception e) {

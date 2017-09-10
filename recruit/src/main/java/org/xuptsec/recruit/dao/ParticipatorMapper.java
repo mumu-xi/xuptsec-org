@@ -23,6 +23,6 @@ public interface ParticipatorMapper {
      * 查找所有学生报名信息
      * @return
      */
-    List<Participator> findParticipatorByPage(@Param("pageNum") String pageNum, @Param("pageSize") String pageSize);
+    List<Participator> findParticipatorByPage(@Param("pageNum") int pageNum, @Param("pageSize") int pageSize);
 
 }

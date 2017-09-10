@@ -18,5 +18,5 @@ public interface ParticipatorService {
      * 查找所有学生报名信息
      * @return
      */
-    ResultStudentList findParticipatorByPage(String pageNum,String pageSize);
+    ResultStudentList findParticipatorByPage(int pageNum,int pageSize);
 }
