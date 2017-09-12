@@ -7,6 +7,10 @@ public class ResultJoin {
     private String state;
     private String message;
 
+    public ResultJoin(String aFalse, String s) {
+    }
+    public ResultJoin() {
+    }
     @Override
     public String toString() {
         return "Result{" +

@@ -41,7 +41,8 @@
     </bean>
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/**"/>
+            <mvc:mapping path="/api/manager"/>
+            <mvc:exclude-mapping path="/api/manager/login"/>
             <bean class="org.xuptsec.recruit.filter.LoginFilter"></bean>
         </mvc:interceptor>
     </mvc:interceptors>

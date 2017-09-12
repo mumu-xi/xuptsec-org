@@ -21,25 +21,7 @@ public class ManagerServiceImpl implements ManagerService {
      * @param password
      * @return
      */
-    public ResultLogin managerLogin(String username, String password) {
-        ResultLogin result = new ResultLogin();
-        try {
-            Manager manager = managerMapper.managerLogin(username, password);
-            if(manager!=null)
-            {
-                result.setState("true");
-                result.setMessage("请求成功");
-            }
-            else{
-                result.setState("false");
-                result.setMessage("请求失败");
-            }
-        } catch (Exception e) {
-
-
-           // e.printStackTrace();
-        } finally {
-            return result;
-        }
+    public Manager managerLogin(String username, String password) {
+       return managerMapper.managerLogin(username,password);
     }
 }

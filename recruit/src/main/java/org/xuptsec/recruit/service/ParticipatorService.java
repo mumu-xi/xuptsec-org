@@ -10,13 +10,16 @@ import org.xuptsec.recruit.poji.ResultStudentList;
 public interface ParticipatorService {
     /**
      * 插入学生报名信息
+     *
      * @param participator
      * @return
      */
-    public ResultJoin insertParticipator(Participator participator);
+    ResultJoin insertParticipator(Participator participator);
+
     /**
      * 查找所有学生报名信息
+     *
      * @return
      */
-    ResultStudentList findParticipatorByPage(int pageNum,int pageSize);
+    ResultStudentList findParticipatorByPage(int pageNum, int pageSize);
 }
