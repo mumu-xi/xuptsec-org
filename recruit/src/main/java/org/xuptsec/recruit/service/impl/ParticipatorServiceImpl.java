@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.xuptsec.recruit.dao.ParticipatorMapper;
 import org.xuptsec.recruit.poji.Participator;
 import org.xuptsec.recruit.poji.ResultJoin;
-import org.xuptsec.recruit.poji.ResultStudentList;
 import org.xuptsec.recruit.service.ParticipatorService;
 
 /**
@@ -69,28 +68,5 @@ public class ParticipatorServiceImpl implements ParticipatorService {
         }
     }
 
-    /**
-     * 查找所有学生报名信息
-     *
-     * @return
-     */
-    public ResultStudentList findParticipatorByPage(int pageNum, int pageSize) {
-        ResultStudentList result = new ResultStudentList();
-        try {
 
-
-            result.setData(participatorMapper.findParticipatorByPage((pageNum - 1) * pageSize, pageSize));
-            result.setState("true");
-            result.setMessage("请求成功");
-        } catch (Exception e) {
-            result.setState("false");
-            result.setMessage("请求失败");
-
-            e.printStackTrace();
-        } finally {
-            return result;
-        }
-
-
-    }
 }

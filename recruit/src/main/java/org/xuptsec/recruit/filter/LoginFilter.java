@@ -24,6 +24,7 @@ import java.util.UUID;
 public class LoginFilter implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
 
+        //将json字符串转换为json对象
         JSONObject json = JSONUtil.stringToJSONObject(httpServletRequest);
         if (json != null) {
             String requestToken = json.getString("XUPT_SEC_TOKEN");
@@ -31,7 +32,6 @@ public class LoginFilter implements HandlerInterceptor {
                 HttpSession session = httpServletRequest.getSession();
                 Manager manager = (Manager) session.getAttribute("manager");
                 if (session != null && manager != null) {
-                    //将json字符串转换为json对象
 
                     String tokenKey = MD5Util.md5(manager.getUsername() + manager.getPassword() + BASE64Util.toBASE64(manager.getSalt()));
                     String tokenValue = (String) session.getAttribute(tokenKey);
@@ -42,6 +42,7 @@ public class LoginFilter implements HandlerInterceptor {
                 }
             }
         }
+        httpServletResponse.setContentType("text/html; charset=UTF-8");
         ResultJoin resultJoin = new ResultJoin("false","身份验证失败，需重新登录！");
         httpServletResponse.getWriter().write(JSONUtil.objectToJSONString(resultJoin));
         return false;
@@ -58,8 +59,8 @@ public class LoginFilter implements HandlerInterceptor {
         if (session != null && manager != null) {
             String tokenKey = MD5Util.md5(manager.getUsername() + manager.getPassword() + BASE64Util.toBASE64(manager.getSalt()));
             String tokenValue = BASE64Util.toBASE64(manager.getUsername() + UUID.randomUUID() + manager.getPassword() + MD5Util.md5(System.currentTimeMillis() + ""));
+            tokenValue=tokenValue.replaceAll("\r|\n", "");
             session.setAttribute(tokenKey, tokenValue);
-
             Cookie cookies = new Cookie(tokenKey, tokenValue);
             cookies.setPath("/");
             cookies.setMaxAge(900);

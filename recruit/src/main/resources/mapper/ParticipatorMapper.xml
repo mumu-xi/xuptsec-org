@@ -10,17 +10,5 @@
         insert into tb_participator (id,realname,gender,class,number,tel,classify,introduction)
         value(#{stuId},#{stuName},#{stuSex},#{stuClass},#{stuNumber},#{stuTel},#{stuGroup},#{stuIntro})
     </insert>
-    <resultMap id="participatorMap" type="participator">
-        <id column="id" property="stuId"></id>
-        <result column="realname" property="stuName"></result>
-        <result column="gender" property="stuSex"></result>
-        <result column="class" property="stuClass"></result>
-        <result column="number" property="stuNumber"></result>
-        <result column="tel" property="stuTel"></result>
-        <result column="classify" property="stuGroup"></result>
-        <result column="introduction" property="stuIntro"></result>
-    </resultMap>
-    <select id="findParticipatorByPage" resultMap="participatorMap">
-        select * from tb_participator  limit ${pageNum},${pageSize}
-    </select>
+
 </mapper>

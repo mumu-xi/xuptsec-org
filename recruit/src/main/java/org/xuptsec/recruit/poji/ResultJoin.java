@@ -7,8 +7,11 @@ public class ResultJoin {
     private String state;
     private String message;
 
-    public ResultJoin(String aFalse, String s) {
+    public ResultJoin(String state, String message) {
+        this.state = state;
+        this.message = message;
     }
+
     public ResultJoin() {
     }
     @Override

@@ -14,6 +14,8 @@
     <log4j.version>1.2.17</log4j.version>
     <jackson.version>2.5.4</jackson.version>
     <protostuff.version>1.0.8</protostuff.version>
+    <hibernate.validator.version>5.1.2.Final</hibernate.validator.version>
+    <javax.validation.version>1.1.0.Final</javax.validation.version>
   </properties>
 
 
@@ -85,6 +87,18 @@
       <artifactId>mybatis-spring</artifactId>
       <version>1.2.2</version>
     </dependency>
+    <!-- jsr303 validation dependencies-->
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+      <version>${javax.validation.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>${hibernate.validator.version}</version>
+    </dependency>
+
     <!-- 添加servlet3.0核心包 -->
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -96,6 +110,7 @@
       <artifactId>javax.servlet.jsp-api</artifactId>
       <version>2.3.2-b01</version>
     </dependency>
+
     <!-- jstl -->
     <dependency>
       <groupId>javax.servlet</groupId>

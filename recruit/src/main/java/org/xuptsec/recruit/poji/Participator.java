@@ -1,18 +1,35 @@
 package org.xuptsec.recruit.poji;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
+
+
 /**
  * Created by mu on 2017/9/9.
  */
-public class Participator {
+public class Participator implements Serializable {
     private String stuId;
+    @Size(min = 2,max=10)
+    @NotEmpty
     private String stuName;
     /**
      * 为了以后微信接入方便，获取表单时的 1 代表男，2 代表女，逻辑层转换为汉字
      */
+    @NotEmpty
+    @Size(min=1,max=5)
     private String stuSex;
+    @NotEmpty
     private String stuClass;
+    @NotEmpty
+    @Pattern(regexp = "\\d{6,10}")
     private String stuNumber;
+    @Pattern(regexp = "\\d{11}")
+    @NotEmpty
     private String stuTel;
+    @NotEmpty
     private String stuGroup;
     private String stuIntro;
 

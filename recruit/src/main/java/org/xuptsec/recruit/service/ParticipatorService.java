@@ -16,10 +16,5 @@ public interface ParticipatorService {
      */
     ResultJoin insertParticipator(Participator participator);
 
-    /**
-     * 查找所有学生报名信息
-     *
-     * @return
-     */
-    ResultStudentList findParticipatorByPage(int pageNum, int pageSize);
+
 }

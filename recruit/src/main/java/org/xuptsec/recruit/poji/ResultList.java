@@ -5,10 +5,10 @@ import java.util.List;
 /**
  * Created by mu on 2017/9/9.
  */
-public class ResultStudentList {
+public class ResultList<T> {
     private String state;
     private String message;
-    private List<Participator> data;
+    private T data;
 
     @Override
     public String toString() {
@@ -35,11 +35,11 @@ public class ResultStudentList {
         this.message = message;
     }
 
-    public List<Participator> getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(List<Participator> data) {
+    public void setData(T data) {
         this.data = data;
     }
 }

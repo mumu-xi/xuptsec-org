@@ -26,6 +26,7 @@ public class JSONUtil {
     }
 
     public static String objectToJSONString(ResultJoin resultJoin) {
-        return JSONObject.toJSONString(resultJoin).toString();
+        String s = JSONObject.toJSONString(resultJoin).toString();
+        return s;
     }
 }
