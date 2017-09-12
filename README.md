@@ -58,11 +58,15 @@ get json url/api/people
 {
   "message":"请求成功",
   "state":true,
-  "data":{
-    "picurl":"url",
+  "data":[{
+    "picurl":"url1",
     "peopleName":"张三",
     "peopleIntro":"多年深耕技术创业领域，在云计算、移动社交、多媒体处理等领域有着多年的技术积累..."
-  }
+  },{
+    "picurl":"url2",
+    "peopleName":"李四",
+    "peopleIntro":"喵喵..."
+  }]
 }
 失败返回示例:
 {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, browserHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import {
   Form,
   Icon,
@@ -7,30 +7,37 @@ import {
   Button,
   message
 } from 'antd';
+import 'whatwg-fetch';
+import config from '../../config';
 import styles from './index.css';
 
-
 const FormItem = Form.Item;
-
+const { login } = config.api.admin;
 class Index extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { actions, mes, user } = this.props;
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFields((err, value) => {
       if (err) { return false; }
-      actions.login(values).then(() => {
-        const {loginState} = this.props;
+      fetch(login, {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(value)
+      }).then((res) => res.json()).then((res) => {
         // 返回用户数据，登录成功
-        if (loginState) {
-          message.success(mes);
-          browserHistory.push('/');
+        const { state } = res;
+        console.log(res);
+        if (state) {
+          console.log(1);
+          message.success('登录成功');
+          browserHistory.push('/admin/students');
         } else {
-          message.error(mes);
+          console.log(2)
+          message.error('请求失败');
         }
       })
-      .catch(() => {
-        message.error('未知错误');
+      .catch((error) => {
+        message.error(error);
       });
     });
   }

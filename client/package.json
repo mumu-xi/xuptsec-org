@@ -64,7 +64,7 @@
     "compression-webpack-plugin": "^0.4.0",
     "css-loader": "^0.28.2",
     "enzyme": "^2.8.2",
-    "express": "^4.15.3",
+    "express": "^4.15.4",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
     "history": "^4.6.1",

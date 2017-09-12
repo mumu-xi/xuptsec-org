@@ -49,7 +49,8 @@ module.exports = {
       { test: /\.scss$/, loader: `${stylesheetsLoader}'!sass` },
       { test: /\.sass$/, loader: `${stylesheetsLoader}'!sass?indentedSyntax=sass` },
       { test: /\.less$/, loader: `${stylesheetsLoader}'!less` },
-      { test: /\.html$/, loader: 'html-loader' }
+      { test: /\.html$/, loader: 'html-loader' },
+      { test: /\.(png|jpg|gif|mp4|ogg|svg|woff|woff2)$/i, loader: 'url-loader?limit=20000' }
     ]
   }
 };

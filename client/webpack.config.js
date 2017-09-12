@@ -1,8 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const stylesheetsLoader =
   'style-loader!css-loader?modules&localIdentName=[path]-[local]-[hash:base64:3]';
 const htmlWebpackPlugin = new HtmlWebpackPlugin({ template: 'index.html' });
@@ -15,6 +16,7 @@ module.exports = {
   entry: './index',
   output: {
     filename: '[hash].js',
+    publicPath: '/'
   },
   devtool: 'source-map',
   plugins: [htmlWebpackPlugin, definePlugin],
@@ -33,13 +35,22 @@ module.exports = {
       { test: /\.sass$/, loader: `${stylesheetsLoader}'!sass?indentedSyntax=sass` },
       { test: /\.less$/, loader: `${stylesheetsLoader}'!less` },
       { test: /\.html$/, loader: 'html-loader' },
-      { test: /\.(png|jpg|gif|mp4|ogg|svg|woff|woff2)$/, loader: 'file-loader' }
+      { test: /\.(png|jpg|gif|mp4|ogg|svg|woff|woff2)$/i, loader: 'url-loader?limit=20000' }
     ]
   },
   devServer: {
     historyApiFallback: true,
+    hot: true,
+    port: 8080,
     proxy: {
-      '/api*': 'http://localhost:8181'
+      '/api': {
+        // http://g4yriq.natappfree.cc/api/participator/insert
+        // target: 'http://g4yriq.natappfree.cc',
+        // pathRewrite: { '^/api': '' }
+      }
     }
   }
 };
+
+// pathRewrite: { '^/api': '' },
+// secure: false

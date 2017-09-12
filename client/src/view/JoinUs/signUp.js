@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Input, Form, Button,message } from 'antd';
+import { Input, Form, Button,message, Spin } from 'antd';
+import { browserHistory } from 'react-router';
 import 'whatwg-fetch';
 import xss from 'xss';
 
-import { signup } from '../../config';
+import config from '../../config';
 import styles from './index.css';
 
+const { signup } = config.api;
 const FormItem = Form.Item;
 const { TextArea } = Input;
 const options = {
@@ -48,16 +50,23 @@ class Index extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, value) => {
       value.stuIntro = myxss.process(value.stuIntro);
+      if (err) { return false; }
+      this.setState({ loading: true });
       fetch(signup, {
+        mode: 'cors',
         method: 'POST',
-        header: { 'Content-type': 'application/json' },
-        body: JSON.stringify(...value)
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(value),
+        credentials: 'same-origin',
       }).then((res) => res.json()).then((res) => {
-        const { message, state } = res;
+        const { state } = res;
+        this.setState({ loading: false });
+        // console.log(res, state, res.message);
         if (state) {
-          message.success(message);
+          message.success(`${value.stuName}同学，你已经报名成功啦，等待近期面试通知~`);
+          browserHistory.push('/');
         } else {
-          message.error(message);
+          message.error('报名失败');
         }
       }).catch((error) => {
         message.error(error);
@@ -69,6 +78,9 @@ class Index extends Component {
     return (
       <div>
         <h3 className={styles.title}>纳新报名</h3>
+        <div style={{ margin: '0 auto', width: 50, position: 'fixed', top: '50%', left: '50%', zIndex: 999 }}>
+          <Spin spinning={this.state.loading} size="large" />
+        </div>
         <Form
           className={styles.form}
           onSubmit={this.handleSubmit}
