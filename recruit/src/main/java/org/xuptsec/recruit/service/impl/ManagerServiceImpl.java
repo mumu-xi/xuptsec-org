@@ -22,7 +22,7 @@ public class ManagerServiceImpl implements ManagerService {
      * @return
      */
     public Manager managerLogin(String username, String password) {
-       return managerMapper.managerLogin(username,password);
+        return managerMapper.managerLogin(username,password);
     }
     /**
      * 查找所有学生报名信息
@@ -32,20 +32,23 @@ public class ManagerServiceImpl implements ManagerService {
     public ResultList findParticipatorByPage(int pageNum, int pageSize) {
         ResultList result = new ResultList();
         try {
-
-
             result.setData(managerMapper.findParticipatorByPage((pageNum - 1) * pageSize, pageSize));
             result.setState("true");
             result.setMessage("请求成功");
         } catch (Exception e) {
             result.setState("false");
             result.setMessage("请求失败");
-
             e.printStackTrace();
         } finally {
             return result;
         }
-
-
+    }
+    /**
+     * 根据账户名查询手机号
+     * @param username
+     * @return
+     */
+    public String findManagerTelByUsername(String username) {
+        return managerMapper.findManagerTelByUsername(username);
     }
 }

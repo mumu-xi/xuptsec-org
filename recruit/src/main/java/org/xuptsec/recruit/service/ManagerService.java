@@ -14,4 +14,11 @@ public interface ManagerService {
      * @return
      */
     ResultList findParticipatorByPage(int pageNum, int pageSize);
+
+    /**
+     * 根据账户名查询手机号
+     * @param username
+     * @return
+     */
+    String findManagerTelByUsername(String username);
 }

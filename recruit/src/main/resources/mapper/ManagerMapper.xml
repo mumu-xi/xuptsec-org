@@ -19,4 +19,9 @@
     <select id="findParticipatorByPage" resultMap="participatorMap">
         select * from tb_participator  limit ${pageNum},${pageSize}
     </select>
+
+    <select id="findManagerTelByUsername" parameterType="java.lang.String" resultType="java.lang.String">
+        select tel from tb_manager where username=#{username}
+    </select>
+
 </mapper>

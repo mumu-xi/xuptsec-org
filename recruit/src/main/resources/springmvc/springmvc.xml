@@ -17,7 +17,7 @@
     <!-- JSP的显示ViewResolver -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="prefix" value="/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
@@ -39,11 +39,29 @@
             </list>
         </property>
     </bean>
-    <mvc:interceptors>
+   <!-- <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/api/manager/*"/>
             <mvc:exclude-mapping path="/api/manager/login"/>
             <bean class="org.xuptsec.recruit.filter.LoginFilter"></bean>
         </mvc:interceptor>
-    </mvc:interceptors>
+    </mvc:interceptors>-->
+
+
+    <!--表单验证-->
+    <mvc:annotation-driven validator="validator"
+                           conversion-service="conversion-service" />
+    <bean id="validator"
+          class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
+        <property name="validationMessageSource" ref="validatemessageSource" />
+    </bean>
+    <bean id="conversion-service"
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
+    <bean id="validatemessageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="message" />
+        <property name="fileEncodings" value="utf-8" />
+        <property name="cacheSeconds" value="120" />
+    </bean>
 </beans>

@@ -1,17 +1,24 @@
 package org.xuptsec.recruit.poji;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * Created by mu on 2017/9/12.
  */
 public class Login {
+    @NotEmpty()
     private String username;
+    @NotEmpty()
     private String password;
+    @NotEmpty()
+    private String codeValue;
 
     @Override
     public String toString() {
-        return "login{" +
+        return "Login{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", codeValue='" + codeValue + '\'' +
                 '}';
     }
 
@@ -29,5 +36,13 @@ public class Login {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getcodeValue() {
+        return codeValue;
+    }
+
+    public void setcodeValue(String codeValue) {
+        this.codeValue = codeValue;
     }
 }

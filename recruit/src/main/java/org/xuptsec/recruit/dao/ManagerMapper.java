@@ -19,4 +19,5 @@ public interface ManagerMapper {
      */
     List<Participator> findParticipatorByPage(@Param("pageNum") int pageNum, @Param("pageSize") int pageSize);
 
+    String findManagerTelByUsername(String username);
 }

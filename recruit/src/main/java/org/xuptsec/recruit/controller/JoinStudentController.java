@@ -9,6 +9,8 @@ import org.xuptsec.recruit.poji.Participator;
 import org.xuptsec.recruit.poji.ResultJoin;
 import org.xuptsec.recruit.service.ParticipatorService;
 
+import javax.validation.Valid;
+
 /**
  * Created by mu on 2017/9/9.
  */
@@ -25,7 +27,7 @@ public class JoinStudentController {
      */
     @RequestMapping(value="/insert"/*,method = RequestMethod.POST*/)
     public @ResponseBody
-    ResultJoin insertParticipator(@RequestBody Participator participator){
+    ResultJoin insertParticipator(/*@RequestBody*/  @Valid Participator participator){
         System.out.println("打印信息："+participator);
         return participatorService.insertParticipator(participator);
     }

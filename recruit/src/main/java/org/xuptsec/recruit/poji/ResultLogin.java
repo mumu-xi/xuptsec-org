@@ -7,6 +7,14 @@ public class ResultLogin  {
     private String state;
     private String message;
 
+    public ResultLogin(String message,String state) {
+        this.state = state;
+        this.message = message;
+    }
+
+    public ResultLogin() {
+    }
+
     @Override
     public String toString() {
         return "ResultLogin{" +

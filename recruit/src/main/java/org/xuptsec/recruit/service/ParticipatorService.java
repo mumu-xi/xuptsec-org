@@ -2,7 +2,6 @@ package org.xuptsec.recruit.service;
 
 import org.xuptsec.recruit.poji.Participator;
 import org.xuptsec.recruit.poji.ResultJoin;
-import org.xuptsec.recruit.poji.ResultStudentList;
 
 /**
  * Created by mu on 2017/9/9.
