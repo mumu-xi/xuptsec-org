@@ -1,3 +1,28 @@
 .wrapper{
-  height: 74vh;
+  height: 80vh;
+}
+.title {
+  color: #404040;;
+  text-align: center;
+  font-family: Helvetica,Arial,sans-serif;
+}
+.title::after {
+  display: block;
+  content: '';
+  width: 3rem;
+  height: 2px;
+  background: #404040;
+  margin: 0 auto;
+}
+@media screen and (min-width:768px) {
+  .title {
+    font-size: 30px;
+    padding: 50px 0 30px;
+  }
+}
+@media screen and (max-width:768px) {
+   .title {
+    font-size: 18px;
+    padding: 30px 0 40px;
+   }
 }

@@ -52,7 +52,6 @@ export default class extends Component {
     ];
 
     const { route = '' } = this.props;
-    // console.log(this.props.route);
     return (
       <div className={styles.header}>
         <Link to="/"><div className={styles.logo} /></Link>

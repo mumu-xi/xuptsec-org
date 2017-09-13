@@ -34,9 +34,7 @@ const App = (
 
       <Route path="/about" component={AboutIndex}>
         <Route path="lab" component={Lab} />
-        <Route path="people" component={Sider} >
-          <Route path=":id" component={People} />
-        </Route>
+        <Route path="people" component={People} />
         <Route path="development" component={Development} />
         <Route path="security" component={Security} />
       </Route>

@@ -43,7 +43,12 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        query: {
+          plugins: [
+            ['import', { libraryName: 'antd', style: 'css' }] // `style: true` 会加载 less 文件
+          ]
+        }
       },
       { test: /\.css$/, loader: stylesheetsLoader },
       { test: /\.scss$/, loader: `${stylesheetsLoader}'!sass` },

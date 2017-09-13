@@ -144,5 +144,17 @@
 }
 /***********************interview.js************************/
 .interviewWrapper,.freeWrapper{
-  height: 74vh;
+  height: 80vh;
+}
+/***********************free.js************************/
+.freeWrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.freeQR{
+  width: 275px;
+  height: 275px;
+  background-size: contain;
+  background: url(../../../public/free.jpg);
 }

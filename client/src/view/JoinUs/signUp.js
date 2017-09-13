@@ -61,7 +61,6 @@ class Index extends Component {
       }).then((res) => res.json()).then((res) => {
         const { state } = res;
         this.setState({ loading: false });
-        // console.log(res, state, res.message);
         if (state) {
           message.success(`${value.stuName}同学，你已经报名成功啦，等待近期面试通知~`);
           browserHistory.push('/');
