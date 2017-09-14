@@ -256,7 +256,21 @@
     </dependency>
 
 
+    <dependency>
+      <groupId>*</groupId>
+      <artifactId>*</artifactId>
+      <version>*</version>
+      <scope>system</scope>
+      <systemPath>E:/study/xuptsec-org/recruit/src/main/libs/aliyun-java-sdk-core-3.2.3.jar</systemPath>
+    </dependency>
 
+    <dependency>
+      <groupId>*</groupId>
+      <artifactId>*</artifactId>
+      <version>*</version>
+      <scope>system</scope>
+      <systemPath>E:/study/xuptsec-org/recruit/src/main/libs/aliyun-java-sdk-dysmsapi-1.0.0.jar</systemPath>
+    </dependency>
   </dependencies>
   <build>
     <finalName>recruit</finalName>

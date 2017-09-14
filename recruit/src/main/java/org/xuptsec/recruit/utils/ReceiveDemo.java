@@ -1,3 +1,4 @@
+/*
 package org.xuptsec.recruit.utils;
 
 import java.text.ParseException;
@@ -15,10 +16,12 @@ import com.alicom.mns.tools.MessageListener;
 import com.aliyun.mns.model.Message;
 import com.google.gson.Gson;
 
+*/
 /**
  * 只能用于接收云通信的消息，不能用于接收其他业务的消息
  * 短信上行消息接收demo
- */
+ *//*
+
 public class ReceiveDemo {
 
 	private static Log logger=LogFactory.getLog(ReceiveDemo.class);
@@ -75,14 +78,16 @@ public class ReceiveDemo {
 		String accessKeyId="LTAIX3k7TxFFESbo";
 		String accessKeySecret="K7aRGG7DB4tRqB5D0H0bFQU1JtKZBs";
 
-		/*
+		*/
+/*
 		* TODO 将messageType和queueName替换成您需要的消息类型名称和对应的队列名称
 		*云通信产品下所有的回执消息类型:
 		*1:短信回执：SmsReport，
 		*2:短息上行：SmsUp
 		*3:语音呼叫：VoiceReport
 		*4:流量直冲：FlowReport
-		*/
+		*//*
+
 		String messageType="messageType";//此处应该替换成相应产品的消息类型
 		String queueName="queueName";//在云通信页面开通相应业务消息后，就能在页面上获得对应的queueName,格式类似Alicom-Queue-xxxxxx-SmsReport
 		puller.startReceiveMsg(accessKeyId,accessKeySecret, messageType, queueName, new MyMessageListener());
@@ -91,3 +96,4 @@ public class ReceiveDemo {
 	
 	
 }
+*/

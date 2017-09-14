@@ -11,14 +11,14 @@ public class Login {
     @NotEmpty()
     private String password;
     @NotEmpty()
-    private String codeValue;
+    private String verification;
 
     @Override
     public String toString() {
         return "Login{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", codeValue='" + codeValue + '\'' +
+                ", verification='" + verification + '\'' +
                 '}';
     }
 
@@ -38,11 +38,11 @@ public class Login {
         this.password = password;
     }
 
-    public String getcodeValue() {
-        return codeValue;
+    public String getVerification() {
+        return verification;
     }
 
-    public void setcodeValue(String codeValue) {
-        this.codeValue = codeValue;
+    public void setVerification(String verification) {
+        this.verification = verification;
     }
 }

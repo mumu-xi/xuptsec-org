@@ -32,7 +32,6 @@ import java.util.UUID;
  * 国际短信发送请勿参照此DEMO
  */
 public class SendMessageUtil {
-
     //产品名称:云通信短信API产品,开发者无需替换
     static final String product = "Dysmsapi";
     //产品域名,开发者无需替换
@@ -41,8 +40,10 @@ public class SendMessageUtil {
     // TODO 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)
     static final String accessKeyId = "LTAIX3k7TxFFESbo";
     static final String accessKeySecret = "K7aRGG7DB4tRqB5D0H0bFQU1JtKZBs";
-
-    public static SendSmsResponse sendSms(String tel, String codeValue) throws ClientException {
+   /* public static SendSmsResponse sendSms() throws ClientException{
+        return null;
+    }*/
+    public static SendSmsResponse sendSms(String tel, String verification) throws ClientException {
 
         //可自助调整超时时间
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
@@ -62,7 +63,7 @@ public class SendMessageUtil {
         //必填:短信模板-可在短信控制台中找到
         request.setTemplateCode("SMS_95375011");
         //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
-        request.setTemplateParam("{\"code\":\""+codeValue+"\"}");
+        request.setTemplateParam("{\"code\":\""+verification+"\"}");
 
         //选填-上行短信扩展码(无特殊需求用户请忽略此字段)
         //request.setSmsUpExtendCode("90997");
@@ -108,11 +109,9 @@ public class SendMessageUtil {
         return querySendDetailsResponse;
     }
 
-    public static MessageStatus sendMessage(String tel) throws ClientException, InterruptedException {
-        //生成验证码
-        String CodeValue= String.valueOf(new Random().nextInt(89999)+10000);
+    public static MessageStatus sendMessage(String tel, String verification) throws ClientException, InterruptedException {
         //发短信
-        SendSmsResponse response = sendSms(tel,CodeValue);
+        SendSmsResponse response = sendSms(/*"18082265313","666"*/tel,verification);
         /*System.out.println("短信接口返回的数据----------------");
         System.out.println("Code=" + response.getCode());
         System.out.println("Message=" + response.getMessage());
@@ -124,7 +123,7 @@ public class SendMessageUtil {
         messageStatus.setRequestId(response.getRequestId());
         messageStatus.setBizId(response.getBizId());
 
-        messageStatus.setCodeValue(CodeValue);
+        messageStatus.setVerification(verification);
         // Thread.sleep(3000L);
         //以后把这一块写入日志
         //查明细
@@ -151,4 +150,5 @@ public class SendMessageUtil {
         return  messageStatus;
 
     }
+
 }

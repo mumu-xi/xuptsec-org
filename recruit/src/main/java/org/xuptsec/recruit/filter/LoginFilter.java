@@ -27,7 +27,7 @@ public class LoginFilter implements HandlerInterceptor {
         //将json字符串转换为json对象
         JSONObject json = JSONUtil.stringToJSONObject(httpServletRequest);
         if (json != null) {
-            String requestToken = json.getString("XUPT_SEC_TOKEN");
+            String requestToken = json.getString("token");
             if (requestToken != null) {
                 HttpSession session = httpServletRequest.getSession();
                 Manager manager = (Manager) session.getAttribute("manager");

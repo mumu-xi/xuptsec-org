@@ -9,7 +9,7 @@ public class MessageStatus {
     private String RequestId;
     private String BizId;
 
-    private String CodeValue;
+    private String verification;
 
     public String getCode() {
         return Code;
@@ -43,12 +43,12 @@ public class MessageStatus {
         BizId = bizId;
     }
 
-    public String getCodeValue() {
-        return CodeValue;
+    public String getVerification() {
+        return verification;
     }
 
-    public void setCodeValue(String codeValue) {
-        CodeValue = codeValue;
+    public void setVerification(String verification) {
+        this.verification = verification;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class MessageStatus {
                 ", Message='" + Message + '\'' +
                 ", RequestId='" + RequestId + '\'' +
                 ", BizId='" + BizId + '\'' +
-                ", CodeValue='" + CodeValue + '\'' +
+                ", verification='" + verification + '\'' +
                 '}';
     }
 }
