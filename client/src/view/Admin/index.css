@@ -12,11 +12,11 @@
   font-size: 60px;
   color: #108ee9;
   text-align: center;
+  text-shadow: 0 0 6px #ccc;
   font-family: Helvetica, Tahoma, Arial;
 }
 .loginForm {
   border: 1px solid #d5d5d5;
-  padding: 80px;
   background: #FFF;
   margin-top: 30px;
 }
@@ -28,6 +28,7 @@
    .loginForm{
     width: 40vw;
     min-width: 400px;
+    padding: 80px;
    }
   .loginBtn {
     width: 20vw;
@@ -38,10 +39,16 @@
 @media screen and (max-width:640px) {
    .loginForm{
     width: 100vw;
+    padding: 70px;
    }
   .loginBtn {
     width: 30vw;
     height: 30px;
     font-size: 12px;
   }
+}
+@media screen and (max-width:320px) {
+   .loginForm{
+     padding: 20px;
+   }
 }

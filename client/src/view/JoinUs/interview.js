@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import cssModules from 'react-css-modules';
 import styles from './index.css';
 
-export default class extends Component {
+class Index extends Component {
   render() {
     return (
-      <div className={styles.interviewWrapper}>
-        <h1 className={styles.interviewContainer}>interview</h1>
+      <div styleName="interviewWrapper">
+        <h1 stylesName="interviewContainer" >interview</h1>
       </div>
     );
   }
 }
+
+export default cssModules(Index, styles);

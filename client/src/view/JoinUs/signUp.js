@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Input, Form, Button,message, Spin } from 'antd';
+import { Input, Form, Button, message, Spin } from 'antd';
 import { browserHistory } from 'react-router';
+import cssmodules from 'react-css-modules';
 import 'whatwg-fetch';
 import xss from 'xss';
 
@@ -76,12 +77,12 @@ class Index extends Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <div>
-        <h3 className={styles.title}>纳新报名</h3>
+        <h3 styleName="title">纳新报名</h3>
         <div style={{ margin: '0 auto', width: 50, position: 'fixed', top: '50%', left: '50%', zIndex: 999 }}>
           <Spin spinning={this.state.loading} size="large" />
         </div>
         <Form
-          className={styles.form}
+          styleName="form"
           onSubmit={this.handleSubmit}
         >
           <FormItem >
@@ -89,51 +90,51 @@ class Index extends Component {
               rules: [{
                 required: true, message: '请输入姓名',
               }]
-            })(<Input placeholder="请输入姓名" className={styles.input} />)}
+            })(<Input placeholder="请输入姓名" styleName="input" />)}
           </FormItem>
           <FormItem >
             {getFieldDecorator('stuSex', {
               rules: [{
                 required: true, message: '请输入姓别',
               }]
-            })(<Input placeholder="请输入姓别" className={styles.input} />)}
+            })(<Input placeholder="请输入姓别" styleName="input" />)}
           </FormItem>
           <FormItem >
             {getFieldDecorator('stuClass', {
               rules: [{
                 required: true, message: '请输入班级',
               }]
-            })(<Input placeholder="请输入班级" className={styles.input} />)}
+            })(<Input placeholder="请输入班级" styleName="input" />)}
           </FormItem>
           <FormItem >
             {getFieldDecorator('stuNumber', {
               rules: [{
                 required: true, message: '请输入学号',
               }]
-            })(<Input placeholder="请输入学号" className={styles.input} />)}
+            })(<Input placeholder="请输入学号" styleName="input" />)}
           </FormItem>
           <FormItem >
             {getFieldDecorator('stuTel', {
               rules: [{
                 required: true, message: '请输入电话号码',
               }]
-            })(<Input placeholder="联系电话" className={styles.input} />)}
+            })(<Input placeholder="联系电话" styleName="input" />)}
           </FormItem>
           <FormItem >
             {getFieldDecorator('stuGroup', {
               rules: [{
                 required: true, message: '请选择',
               }]
-            })(<Input placeholder="面试方向（安全组/开发组/待定)" className={styles.input} />)}
+            })(<Input placeholder="面试方向（安全组/开发组/待定)" styleName="input" />)}
           </FormItem>
           <FormItem>
             {getFieldDecorator('stuIntro', {
               rules: [{
                 required: true, message: '简单介绍一下自己呗~'
               }]
-            })(<TextArea rows={7} placeholder="自我介绍" className={styles.textarea} />)}
+            })(<TextArea rows={7} placeholder="自我介绍" styleName="textarea" />)}
           </FormItem>
-          <Button type="primary" htmlType="submit" className={styles.signUpBtn}>
+          <Button type="primary" htmlType="submit" stylesName="signUpBtn">
              报名
           </Button>
         </Form>
@@ -142,4 +143,4 @@ class Index extends Component {
     );
   }
 }
-export default Form.create()(Index);
+export default Form.create()(cssmodules(Index, styles));

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import cssmodules from 'react-css-modules';
 import styles from './index.css';
 
-export default class extends Component {
+class Index extends Component {
   render() {
     const requires = [
       { step: 1, title: '纳新要求', text: '这里写纳新要求' },
@@ -9,17 +10,17 @@ export default class extends Component {
       { step: 3, title: '面试安排', text: '这里是面试安排信息' },
     ];
     return (
-      <div className={styles.requireWrapper}>{
+      <div styleName="requireWrapper">{
         requires.map((require) => {
           const { step, title, text } = require;
           return (
-            <div className={styles.step} key={step}>
-              <span className={styles.stepIndex}>
+            <div styleName="step" key={step}>
+              <span styleName="stepIndex">
                 <span>{step}</span>
-                <div className={styles.dotted} />
+                <div styleName="dotted" />
               </span>
-              <div className={styles.description} >
-                <h4 className={styles.requireTitle}>{title}</h4>
+              <div styleName="description" >
+                <h4 styleName="requireTitle">{title}</h4>
                 <p>{text}</p>
               </div>
             </div>
@@ -29,3 +30,4 @@ export default class extends Component {
     );
   }
 }
+export default cssmodules(Index, styles);

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import cssModules from 'react-css-modules';
 import styles from './index.css';
 
-export default class extends Component {
+class Index extends Component {
   state = {
     wrapperStyle: { backgroundPositionX: '50%', backgroundPositionY: '50%' }
   }
@@ -15,8 +16,8 @@ export default class extends Component {
   }
 
   handleMove = (e) => {
-    let x = (e.pageX * -1 / 3);
-    let y = (e.pageY * -1 / 3);
+    const x = (e.pageX * -1 / 3);
+    const y = (e.pageY * -1 / 3);
     this.setState({
       wrapperStyle: {
         backgroundPositionX: x,
@@ -26,11 +27,12 @@ export default class extends Component {
   }
   render() {
     return (
-      <div className={styles.homeWrapper} >
-        <div className={styles.home} onMouseMove={this.handleMove} style={this.state.wrapperStyle}>
-          <h1 className={styles.welc}> WELCOME TO XUPTSEC</h1>
+      <div styleName="homeWrapper">
+        <div styleName="home" onMouseMove={this.handleMove} style={this.state.wrapperStyle}>
+          <h1 styleName="welc"> WELCOME TO XUPTSEC</h1>
         </div>
       </div>
     );
   }
 }
+export default cssModules(Index, styles);

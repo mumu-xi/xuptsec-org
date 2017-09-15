@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-
+import cssModules from 'react-css-modules';
 import { Menu, Button, Icon } from 'antd';
 import styles from './index.css';
 
 const SubMenu = Menu.SubMenu;
-export default class extends Component {
+class Index extends Component {
   state={
     collapsed: true,
     menuStyle: {
@@ -53,13 +53,13 @@ export default class extends Component {
 
     const { route = '' } = this.props;
     return (
-      <div className={styles.header}>
-        <Link to="/"><div className={styles.logo} /></Link>
+      <div styleName="header">
+        <Link to="/"><div styleName="logo" /></Link>
         <Menu
           mode="horizontal"
           theme="dark"
           selectedKeys={route ? [`.$${route}`] : ['.$']}
-          className={styles.pcMenu}
+          styleName="pcMenu"
         >
           {
             menus.map((menu) => {
@@ -84,14 +84,14 @@ export default class extends Component {
             })
           }
         </Menu>
-        <div className={styles.responsiveContaner}>
+        <div styleName="responsiveContaner">
           <Button onClick={this.toggleCollapsed} style={{ marginBottom: 16 }} >
             <Icon type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} />
           </Button>
           <Menu
             mode="inline"
             theme="dark"
-            className={styles.menu}
+            styleName="menu"
             style={this.state.menuStyle}
             selectedKeys={route ? [`.$${route}`] : ['.$']}
             onClick={this.toggleCollapsed}
@@ -124,4 +124,4 @@ export default class extends Component {
     );
   }
 }
-
+export default cssModules(Index, styles);

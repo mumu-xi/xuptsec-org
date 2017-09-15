@@ -7,7 +7,6 @@ const { Content } = Layout;
 
 export default class extends Component {
   render() {
-  // console.log('Index-index.js',this.props);
     const route = this.props.children.props.route.path;
     return (
       <div>
