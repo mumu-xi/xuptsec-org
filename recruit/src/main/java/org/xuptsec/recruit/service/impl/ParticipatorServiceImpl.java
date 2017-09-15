@@ -52,18 +52,15 @@ public class ParticipatorServiceImpl implements ParticipatorService {
                 participator.setStuSex("1".equals(sex) ? "男" : "女");
             participatorMapper.insertParticipator(participator);
             result.setState("true");
-            result.setMessage("请求成功");
+            result.setMessage("报名成功");
         } catch (Exception e) {
             result.setState("false");
-            result.setMessage("请求失败");
+            result.setMessage("非常抱歉，报名失败了，请再试一次。");
 
             e.printStackTrace();
         } finally {
             if (sb.toString() != "")
-                result.setMessage(sb.toString());
-            else
-                result.setMessage("请求成功");
-
+                result.setMessage("非常抱歉，报名失败了，请再试一次。"+sb.toString());
             return result;
         }
     }

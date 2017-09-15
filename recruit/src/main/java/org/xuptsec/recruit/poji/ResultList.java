@@ -8,15 +8,25 @@ import java.util.List;
 public class ResultList<T> {
     private String state;
     private String message;
+    private int total;
     private T data;
 
     @Override
     public String toString() {
-        return "ResultStudentList{" +
+        return "ResultList{" +
                 "state='" + state + '\'' +
                 ", message='" + message + '\'' +
+                ", total=" + total +
                 ", data=" + data +
                 '}';
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 
     public String getState() {

@@ -13,11 +13,7 @@ import java.util.List;
 @Repository
 public interface ManagerMapper {
     Manager managerLogin(@Param("username") String username, @Param("password") String password);
-    /**
-     * 查找所有学生报名信息
-     * @return
-     */
-    List<Participator> findParticipatorByPage(@Param("pageNum") int pageNum, @Param("pageSize") int pageSize);
+
 
     String findManagerTelByUsername(String username);
 }
