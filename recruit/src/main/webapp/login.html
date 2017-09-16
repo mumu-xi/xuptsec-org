@@ -3,12 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script type="text/javascript">
+        function ajaxSubmit(){
+            var xmlhttp;
+            if (window.XMLHttpRequest) {
+                xmlhttp = new XMLHttpRequest();
+            } else {
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            return xmlhttp;
+
+        }
+        function search(){
+
+            var a=document.getElementById("un").value;
+            alert(a);
+            var xmlHttp=ajaxSubmit();
+            xmlHttp.open("get","/api/manager/verification?username="+a,true);
+            xmlHttp.send(null);
+
+            xmlHttp.onreadystatechange=function(){
+
+                if(xmlHttp.readyState==4&&xmlHttp.status==200){
+
+                    alert(xmlHttp.responseText);
+
+                }
+            }
+
+        }
+    </script>
 </head>
 <body>
-    <form method="post" action="/api/manager/testlogin">
-        账号<input type="text" name="username">
-        密码<input type="text" name="password" >
-        <input type="submit">
-    </form>
+<form method="post" action="/api/manager/login">
+    账号<input id="un" type="text" name="username">
+    密码<input type="text" name="password" >
+    验证码<input id="my" type="text" name="verification"> <div onclick="search()" style="background-color:aquamarine;height: 20px;width: 20px"></div>
+    <input type="submit" value="登录">
+</form>
 </body>
 </html>

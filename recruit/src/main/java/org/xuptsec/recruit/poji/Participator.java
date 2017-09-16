@@ -19,18 +19,21 @@ public class Participator implements Serializable {
      * 为了以后微信接入方便，获取表单时的 1 代表男，2 代表女，逻辑层转换为汉字
      */
     @NotEmpty
-    @Size(min=1,max=5)
+    @Size(max=4)
     private String stuSex;
     @NotEmpty
+    @Size(max=30)
     private String stuClass;
     @NotEmpty
     @Pattern(regexp = "\\d{6,10}")
     private String stuNumber;
-    @Pattern(regexp = "\\d{11}")
+    @Pattern(regexp = "\\d{1,20}")
     @NotEmpty(message = "{stutel.not.empty}")
     private String stuTel;
     @NotEmpty
+    @Size(max=10)
     private String stuGroup;
+    @Size(max=512)
     private String stuIntro;
 
     @Override

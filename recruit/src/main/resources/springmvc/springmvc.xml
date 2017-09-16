@@ -39,14 +39,14 @@
             </list>
         </property>
     </bean>
- <!--   <mvc:interceptors>
+    <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/api/manager/*"/>
             <mvc:exclude-mapping path="/api/manager/login"/>
             <mvc:exclude-mapping path="/api/manager/verification"/>
             <bean class="org.xuptsec.recruit.filter.LoginFilter"></bean>
         </mvc:interceptor>
-    </mvc:interceptors>-->
+    </mvc:interceptors>
 
 
     <!--表单验证-->

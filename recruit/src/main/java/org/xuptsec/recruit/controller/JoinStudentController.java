@@ -28,7 +28,6 @@ public class JoinStudentController {
     @RequestMapping(value="/insert"/*,method = RequestMethod.POST*/)
     public @ResponseBody
     ResultJoin insertParticipator(/*@RequestBody*/  @Valid Participator participator){
-        System.out.println("打印信息："+participator);
         return participatorService.insertParticipator(participator);
     }
 

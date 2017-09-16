@@ -11,8 +11,10 @@ import org.xuptsec.recruit.utils.MD5Util;
 import org.xuptsec.recruit.utils.SendMessageUtil;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.Enumeration;
 import java.util.Random;
 import java.util.UUID;
@@ -43,12 +45,9 @@ public class ManagerController {
                 //生成验证码
                 String verification = String.valueOf(new Random().nextInt(89999) + 10000);
                 SendMessageUtil.sendMessage(stuTel, verification);
-                session.setAttribute(MD5Util.md5("code" + stuTel), verification);
-                String []a = session.getValueNames();
-                for (String aa:
-                        a) {
-                    System.out.println(aa);
-                }
+                String key=MD5Util.md5("code" + stuTel);
+                session.setAttribute(key, verification);
+                String codeValue = (String) session.getAttribute(key);
                 resultLogin.setMessage("获取成功！");
                 resultLogin.setState("true");
             }
@@ -63,27 +62,24 @@ public class ManagerController {
      * 管理员登录
      *
      * @param response
-     * @param session
      * @param login
      * @return
      */
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public @ResponseBody
-    ResultLogin managerLogin(HttpServletResponse response, HttpSession session, @RequestBody Login login) {
+    ResultLogin managerLogin(HttpServletResponse response, HttpServletRequest request, /*@RequestBody*/@Valid Login login) {
         ResultLogin result = new ResultLogin("请求失败", "false");
         try {
+            HttpSession session = request.getSession();
             Manager manager = managerService.managerLogin(login.getUsername(), login.getPassword());
             String stuTel = managerService.findManagerTelByUsername(login.getUsername());
-            String []a = session.getValueNames();
-            for (String aa:
-                 a) {
-                System.out.println(aa);
-            }
 
-            String codeValue = (String) session.getAttribute(MD5Util.md5("code" + stuTel));
+            String key=MD5Util.md5("code" + stuTel);
+            System.out.println("key: "+key);
+            String codeValue = (String) session.getAttribute(key);
             System.out.println(login.getVerification()+","+codeValue);
             if (codeValue != null && codeValue.equals(login.getVerification())) {
-                session.removeAttribute(MD5Util.md5("code" + stuTel));
+                session.removeAttribute("code" + stuTel);
                 if (manager != null) {
                     session.setAttribute("manager", manager);
                     session.setMaxInactiveInterval(900);
@@ -96,7 +92,7 @@ public class ManagerController {
                     cookies.setMaxAge(900);
                     response.addCookie(cookies);
                     result.setState("true");
-                    result.setMessage("请求成功");
+                    result.setMessage("登录成功");
                 }
                 else{
                     result.setState("false");
@@ -123,7 +119,7 @@ public class ManagerController {
      */
     @RequestMapping("/find")
     public @ResponseBody
-    ResultList findParticipator(int pageNum,@RequestParam(value="pageSize",required =false,defaultValue = "10") int pageSize) {
+    ResultList findParticipator(@RequestParam(value="pageNum",required = false,defaultValue = "1") int pageNum,@RequestParam(value="pageSize",required =false,defaultValue = "10") int pageSize) {
 
         return managerService.findParticipatorByPage(pageNum, pageSize);
     }

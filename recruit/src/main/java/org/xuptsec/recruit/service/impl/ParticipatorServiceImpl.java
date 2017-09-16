@@ -59,8 +59,7 @@ public class ParticipatorServiceImpl implements ParticipatorService {
 
             e.printStackTrace();
         } finally {
-            if (sb.toString() != "")
-                result.setMessage("非常抱歉，报名失败了，请再试一次。"+sb.toString());
+
             return result;
         }
     }
