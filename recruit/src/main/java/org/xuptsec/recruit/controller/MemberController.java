@@ -2,6 +2,7 @@ package org.xuptsec.recruit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -11,6 +12,7 @@ import org.xuptsec.recruit.service.MemberService;
 /**
  * Created by mu on 2017/9/16.
  */
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Controller
 @RequestMapping("/api/member")
 public class MemberController {

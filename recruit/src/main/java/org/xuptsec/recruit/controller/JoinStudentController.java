@@ -2,10 +2,7 @@ package org.xuptsec.recruit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.xuptsec.recruit.poji.Participator;
 import org.xuptsec.recruit.poji.ResultJoin;
 import org.xuptsec.recruit.service.ParticipatorService;
@@ -15,6 +12,7 @@ import javax.validation.Valid;
 /**
  * Created by mu on 2017/9/9.
  */
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Controller
 @RequestMapping("/api/participator")
 public class JoinStudentController {

@@ -47,7 +47,14 @@
             <bean class="org.xuptsec.recruit.filter.LoginFilter"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
-
+    <!-- API 接口跨域配置 -->
+    <mvc:cors>
+        <mvc:mapping path="/api/**"
+                     allowed-origins="*"
+                     allowed-methods="POST, GET, OPTIONS, DELETE, PUT"
+                     allowed-headers="Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+                     allow-credentials="true" />
+    </mvc:cors>
 
     <!--表单验证-->
     <mvc:annotation-driven validator="validator"

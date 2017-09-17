@@ -270,13 +270,19 @@
       <systemPath>E:/study/xuptsec-org/recruit/src/main/libs/aliyun-java-sdk-core-3.2.3.jar</systemPath>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/com.thetransactioncompany/cors-filter -->
     <dependency>
-      <groupId>*</groupId>
-      <artifactId>*</artifactId>
-      <version>*</version>
-      <scope>system</scope>
-      <systemPath>E:/study/xuptsec-org/recruit/src/main/libs/aliyun-java-sdk-dysmsapi-1.0.0.jar</systemPath>
+      <groupId>com.thetransactioncompany</groupId>
+      <artifactId>cors-filter</artifactId>
+      <version>1.7</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.thetransactioncompany/java-property-utils -->
+    <dependency>
+      <groupId>com.thetransactioncompany</groupId>
+      <artifactId>java-property-utils</artifactId>
+      <version>1.9</version>
+    </dependency>
+
   </dependencies>
   <build>
     <finalName>recruit</finalName>

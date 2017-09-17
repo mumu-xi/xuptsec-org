@@ -20,6 +20,7 @@ import java.util.UUID;
 /**
  * Created by mu on 2017/9/10.
  */
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Controller
 @RequestMapping("/api/manager")
 public class ManagerController {
