@@ -9,13 +9,13 @@ class Index extends Component {
       <div styleName="container">
         {
           data.length ? data.map((person) => {
-            const { name, intro, picurl } = person;
+            const { peopleName, peopleIntro, picurl, peopleId } = person;
             return (
-              <div styleName="member" key={name}>
+              <div styleName="member" key={peopleId}>
                 <img src={picurl} alt="人物介绍图片" />
                 <div styleName="info">
-                  <h2>{name}</h2>
-                  <p>{intro}</p>
+                  <h2>{peopleName}</h2>
+                  <p>{peopleIntro}</p>
                 </div>
               </div>
             );

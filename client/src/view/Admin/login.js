@@ -50,7 +50,7 @@ class Index extends React.Component {
       if (err) { return false; }
       const formData = new FormData();
       formData.append('username', value.username);
-      console.log(formData);
+      // console.log(formData);
 
       fetch(getVerfic, {
         method: 'POST',
@@ -60,11 +60,7 @@ class Index extends React.Component {
         // 返回用户数据，登录成功
         const { state } = res;
         console.log(res);
-        if (state === 'true') {
-          // 成功
-          console.log(1);
-        } else {
-          // 失败
+        if (state !== 'false') {
           message.error(res.message);
         }
       })
@@ -78,10 +74,15 @@ class Index extends React.Component {
     this.props.form.validateFields((err, value) => {
       if (err) { return false; }
       console.log(value);
+      const formData = new FormData();
+      formData.append('username', value.username);
+      formData.append('password', value.password);
+      formData.append('verification', value.verification);
       fetch(login, {
         method: 'POST',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify(value)
+        // headers: { 'Content-type': 'application/json' },
+        // body: JSON.stringify(value)
+        body: formData
       }).then((res) => res.json()).then((res) => {
         // 返回用户数据，登录成功
         const { state } = res;

@@ -1,5 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
+const ZipPlugin = require('zip-webpack-plugin');
+
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -19,7 +21,14 @@ module.exports = {
     publicPath: '/'
   },
   devtool: 'source-map',
-  plugins: [htmlWebpackPlugin, definePlugin],
+  plugins: [
+    htmlWebpackPlugin,
+    definePlugin,
+    new ZipPlugin({
+      path: path.join(__dirname, 'src'),
+      filename: 'dist.zip'
+    })
+  ],
   resolve: {
     modules: ['node_modules', path.join(__dirname, 'src')]
   },

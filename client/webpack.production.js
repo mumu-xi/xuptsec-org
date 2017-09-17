@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+const ZipPlugin = require('zip-webpack-plugin');
 
 const stylesheetsLoader = ExtractTextPlugin.extract({
   fallbackLoader: 'style-loader',
@@ -33,7 +34,11 @@ module.exports = {
     htmlWebpackPlugin,
     definePlugin,
     uglifyPlugin,
-    compressionPlugin
+    compressionPlugin,
+    new ZipPlugin({
+      path: path.join(__dirname, 'dist'),
+      filename: 'dist.zip'
+    })
   ],
   resolve: {
     modules: ['node_modules', path.join(__dirname, 'src')]

@@ -87,6 +87,7 @@
     "style-loader": "^0.18.0",
     "webpack": "^2.7.0",
     "whatwg-fetch": "^2.0.3",
-    "xss": "^0.3.4"
+    "xss": "^0.3.4",
+    "zip-webpack-plugin": "^2.0.0"
   }
 }
