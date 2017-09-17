@@ -14,7 +14,6 @@ import Free from './view/JoinUs/free';
 import AboutIndex from './view/AboutUs';
 import Lab from './view/AboutUs/lab';
 import People from './view/AboutUs/people';
-import Sider from './components/Sider';
 import Development from './view/AboutUs/development';
 import Security from './view/AboutUs/security';
 // 后台管理
