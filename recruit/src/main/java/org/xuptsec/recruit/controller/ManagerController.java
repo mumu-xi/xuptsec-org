@@ -1,6 +1,5 @@
 package org.xuptsec.recruit.controller;
 
-import javafx.beans.DefaultProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.Enumeration;
 import java.util.Random;
 import java.util.UUID;
 
@@ -35,9 +33,9 @@ public class ManagerController {
      * @param username
      * @return
      */
-    @RequestMapping("/verification")
+    @RequestMapping(value="/verification",method = RequestMethod.POST)
     public @ResponseBody
-    ResultLogin getCodeValue(HttpSession session, String username) {
+    ResultLogin getCodeValue( HttpSession session,HttpServletResponse response, String username) {
         ResultLogin resultLogin = new ResultLogin("获取验证码失败！", "false");
         try {
             String stuTel = managerService.findManagerTelByUsername(username);
@@ -47,6 +45,17 @@ public class ManagerController {
                 SendMessageUtil.sendMessage(stuTel, verification);
                 String key=MD5Util.md5("code" + stuTel);
                 session.setAttribute(key, verification);
+
+
+                String sessionID = session.getId();
+                // Session的ID名称为JSESSIONID，可以通过HTTPWatch查看
+                Cookie cookie = new Cookie("JSESSIONID", sessionID);
+                cookie.setPath("/");  // 设置cookie的路径
+                cookie.setMaxAge(30 * 60); // 设置的有效时间长度是session的存在时间 半个小时
+                response.addCookie(cookie);
+
+
+                System.out.println("验证码 sessionId= "+session.getId());
                 String codeValue = (String) session.getAttribute(key);
                 resultLogin.setMessage("获取成功！");
                 resultLogin.setState("true");
@@ -67,7 +76,7 @@ public class ManagerController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public @ResponseBody
-    ResultLogin managerLogin(HttpServletResponse response, HttpServletRequest request, /*@RequestBody*/@Valid Login login) {
+    ResultLogin managerLogin(HttpServletResponse response, HttpServletRequest request,/* @RequestBody*/ @Valid Login login) {
         ResultLogin result = new ResultLogin("请求失败", "false");
         try {
             HttpSession session = request.getSession();
@@ -77,6 +86,7 @@ public class ManagerController {
             String key=MD5Util.md5("code" + stuTel);
             System.out.println("key: "+key);
             String codeValue = (String) session.getAttribute(key);
+            System.out.println("登录 sessionId= "+session.getId());
             System.out.println(login.getVerification()+","+codeValue);
             if (codeValue != null && codeValue.equals(login.getVerification())) {
                 session.removeAttribute("code" + stuTel);

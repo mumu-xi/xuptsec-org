@@ -254,6 +254,12 @@
       <artifactId>protostuff-runtime</artifactId>
       <version>${protostuff.version}</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/jexcelapi/jxl -->
+    <dependency>
+      <groupId>jexcelapi</groupId>
+      <artifactId>jxl</artifactId>
+      <version>2.6</version>
+    </dependency>
 
 
     <dependency>

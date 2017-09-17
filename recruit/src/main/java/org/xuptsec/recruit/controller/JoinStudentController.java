@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.xuptsec.recruit.poji.Participator;
 import org.xuptsec.recruit.poji.ResultJoin;
@@ -25,9 +26,9 @@ public class JoinStudentController {
      * @param participator
      * @return result状态码  "message":"请求成功","state":true
      */
-    @RequestMapping(value="/insert"/*,method = RequestMethod.POST*/)
+    @RequestMapping(value="/insert",method = RequestMethod.POST)
     public @ResponseBody
-    ResultJoin insertParticipator(/*@RequestBody*/  @Valid Participator participator){
+    ResultJoin insertParticipator(@RequestBody  @Valid Participator participator){
         return participatorService.insertParticipator(participator);
     }
 

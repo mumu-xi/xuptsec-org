@@ -28,7 +28,7 @@ public class Participator implements Serializable {
     @Pattern(regexp = "\\d{6,10}")
     private String stuNumber;
     @Pattern(regexp = "\\d{1,20}")
-    @NotEmpty(message = "{stutel.not.empty}")
+    @NotEmpty
     private String stuTel;
     @NotEmpty
     @Size(max=10)

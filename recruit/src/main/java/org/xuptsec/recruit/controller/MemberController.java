@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.xuptsec.recruit.poji.ResultList;
-import org.xuptsec.recruit.service.ManagerService;
 import org.xuptsec.recruit.service.MemberService;
 
 /**
