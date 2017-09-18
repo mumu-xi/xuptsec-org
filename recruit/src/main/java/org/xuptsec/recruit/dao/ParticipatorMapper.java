@@ -26,4 +26,9 @@ public interface ParticipatorMapper {
     List<Participator> findParticipatorByPage(@Param("pageNum") int pageNum, @Param("pageSize") int pageSize);
 
     int findTotalParticipator();
+    /**
+     * 查找所有已报名学生的信息
+     * @return
+     */
+    List<Participator> findParticipatorAll();
 }

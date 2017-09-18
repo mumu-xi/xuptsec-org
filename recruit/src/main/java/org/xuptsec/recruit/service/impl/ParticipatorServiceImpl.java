@@ -7,6 +7,8 @@ import org.xuptsec.recruit.poji.Participator;
 import org.xuptsec.recruit.poji.ResultJoin;
 import org.xuptsec.recruit.service.ParticipatorService;
 
+import java.util.List;
+
 /**
  * Created by mu on 2017/9/9.
  */
@@ -62,6 +64,13 @@ public class ParticipatorServiceImpl implements ParticipatorService {
 
             return result;
         }
+    }
+    /**
+     * 查找所有已报名学生的信息
+     * @return
+     */
+    public List<Participator> findParticipatorAll() {
+        return participatorMapper.findParticipatorAll();
     }
 
 

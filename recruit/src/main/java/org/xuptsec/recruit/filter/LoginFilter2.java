@@ -18,29 +18,27 @@ import java.util.UUID;
 /**
  * Created by mu on 2017/9/10.
  */
-public class LoginFilter implements HandlerInterceptor {
+public class LoginFilter2 implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
 
-        //将json字符串转换为json对象
-        JSONObject json = JSONUtil.stringToJSONObject(httpServletRequest);
-        if (json != null) {
-            String requestToken = json.getString("token");
+
+            String requestToken = httpServletRequest.getParameter("token");
             if (requestToken != null) {
                 HttpSession session = httpServletRequest.getSession();
+                System.out.println("过滤器 sessionId: "+session.getId());
+
                 Manager manager = (Manager) session.getAttribute("manager");
                 if (manager != null) {
 
                     String tokenKey = MD5Util.md5(manager.getUsername() + manager.getPassword() + BASE64Util.toBASE64(manager.getSalt()));
-                    System.out.println("开始过滤tokenKey: "+tokenKey);
                     String tokenValue = (String) session.getAttribute(tokenKey);
-                    System.out.println("开始过滤tokenValue: "+tokenValue);
                     if (requestToken.trim().equals(tokenValue.trim())) {
                         session.removeAttribute(tokenKey);
                         return true;
                     }
                 }
             }
-        }
+
         httpServletResponse.setContentType("text/html; charset=UTF-8");
         ResultJoin resultJoin = new ResultJoin("false","身份验证失败，需重新登录！");
         httpServletResponse.getWriter().write(JSONUtil.objectToJSONString(resultJoin));
@@ -54,10 +52,11 @@ public class LoginFilter implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
         HttpSession session = httpServletRequest.getSession();
         Manager manager = (Manager) session.getAttribute("manager");
-
-        if (manager != null) {
+        System.out.println(session.getId());
+        if ( manager != null) {
             String tokenKey = MD5Util.md5(manager.getUsername() + manager.getPassword() + BASE64Util.toBASE64(manager.getSalt()));
             String tokenValue = BASE64Util.toBASE64(manager.getUsername() + UUID.randomUUID() + manager.getPassword() + MD5Util.md5(System.currentTimeMillis() + ""));
+
             tokenValue=tokenValue.replaceAll("\r|\n", "");
             session.setAttribute(tokenKey, tokenValue);
             Cookie cookies = new Cookie("token", tokenValue);

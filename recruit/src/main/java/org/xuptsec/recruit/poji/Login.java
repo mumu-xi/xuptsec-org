@@ -14,8 +14,8 @@ public class Login {
     @NotEmpty()
     @Size(max=20)
     private String password;
-    @NotEmpty()
-    @Size(max=10)
+   /* @NotEmpty()
+    @Size(max=10)*/
     private String verification;
 
     @Override

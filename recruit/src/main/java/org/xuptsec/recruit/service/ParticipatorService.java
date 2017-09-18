@@ -3,6 +3,9 @@ package org.xuptsec.recruit.service;
 import org.xuptsec.recruit.poji.Participator;
 import org.xuptsec.recruit.poji.ResultJoin;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created by mu on 2017/9/9.
  */
@@ -15,5 +18,10 @@ public interface ParticipatorService {
      */
     ResultJoin insertParticipator(Participator participator);
 
+    /**
+     * 查找所有已报名学生的信息
+     * @return
+     */
+    List<Participator> findParticipatorAll();
 
 }

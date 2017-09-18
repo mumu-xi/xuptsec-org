@@ -1,3 +1,4 @@
+/*
 package org.xuptsec.recruit.utils;
 
 import com.aliyuncs.DefaultAcsClient;
@@ -20,6 +21,7 @@ import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
 
+*/
 /**
  * Created on 17/6/7.
  * 短信API产品的DEMO程序,工程中包含了一个SmsDemo类，直接通过
@@ -30,7 +32,8 @@ import java.util.UUID;
  * <p>
  * 备注:Demo工程编码采用UTF-8
  * 国际短信发送请勿参照此DEMO
- */
+ *//*
+
 public class SendMessageUtil {
     //产品名称:云通信短信API产品,开发者无需替换
     static final String product = "Dysmsapi";
@@ -40,9 +43,11 @@ public class SendMessageUtil {
     // TODO 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)
     static final String accessKeyId = "LTAIzetY7Qlk7iFJ";
     static final String accessKeySecret = "CjCTeRZOQklzgccJgmSrYotZ98nLs5";
-   /* public static SendSmsResponse sendSms() throws ClientException{
+   */
+/* public static SendSmsResponse sendSms() throws ClientException{
         return null;
-    }*/
+    }*//*
+
     public static SendSmsResponse sendSms(String tel, String verification) throws ClientException {
 
         //可自助调整超时时间
@@ -111,12 +116,16 @@ public class SendMessageUtil {
 
     public static MessageStatus sendMessage(String tel, String verification) throws ClientException, InterruptedException {
         //发短信
-        SendSmsResponse response = sendSms(/*"18082265313","666"*/tel,verification);
-        /*System.out.println("短信接口返回的数据----------------");
+        SendSmsResponse response = sendSms(*/
+/*"18082265313","666"*//*
+tel,verification);
+        */
+/*System.out.println("短信接口返回的数据----------------");
         System.out.println("Code=" + response.getCode());
         System.out.println("Message=" + response.getMessage());
         System.out.println("RequestId=" + response.getRequestId());
-        System.out.println("BizId=" + response.getBizId());*/
+        System.out.println("BizId=" + response.getBizId());*//*
+
         MessageStatus messageStatus = new MessageStatus();
         messageStatus.setCode(response.getCode());
         messageStatus.setMessage(response.getMessage());
@@ -152,3 +161,4 @@ public class SendMessageUtil {
     }
 
 }
+*/

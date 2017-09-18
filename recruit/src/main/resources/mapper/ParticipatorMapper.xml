@@ -27,4 +27,7 @@
     <select id="findParticipatorByPage" resultMap="participatorMap">
         select * from tb_participator  limit ${pageNum},${pageSize}
     </select>
+    <select id="findParticipatorAll" resultMap="participatorMap">
+         select * from tb_participator ORDER BY realname,tel
+    </select>
 </mapper>

@@ -1,12 +1,22 @@
 package org.xuptsec.recruit.service.impl;
 
+import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.xuptsec.recruit.dao.ManagerMapper;
 import org.xuptsec.recruit.dao.ParticipatorMapper;
 import org.xuptsec.recruit.poji.Manager;
+import org.xuptsec.recruit.poji.Participator;
 import org.xuptsec.recruit.poji.ResultList;
 import org.xuptsec.recruit.service.ManagerService;
+import org.xuptsec.recruit.service.ParticipatorService;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by mu on 2017/9/10.
@@ -54,4 +64,6 @@ public class ManagerServiceImpl implements ManagerService {
     public String findManagerTelByUsername(String username) {
         return managerMapper.findManagerTelByUsername(username);
     }
+
+
 }
