@@ -14,7 +14,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
@@ -69,6 +68,10 @@ public class ManagerController {
                 resultLogin.setMessage("获取成功！");
                 resultLogin.setState("true");
             }
+            else{
+                resultLogin.setMessage("账号或手机号不存在");
+                resultLogin.setState("false");
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -85,7 +88,7 @@ public class ManagerController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public @ResponseBody
-    ResultLogin managerLogin(HttpServletResponse response, HttpServletRequest request, @RequestBody @Valid Login login) {
+    ResultLogin managerLogin(HttpServletResponse response, HttpServletRequest request, @RequestBody /*@Valid*/ Login login) {
         ResultLogin result = new ResultLogin("请求失败", "false");
         try {
             HttpSession session = request.getSession();

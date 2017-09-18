@@ -3,16 +3,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.xuptsec.recruit.dao.MemberMapper">
     <resultMap id="memberMap" type="member">
-        <id column="id" property="peopleId"></id>
+
         <result column="realname" property="peopleName"></result>
-        <result column="gender" property="peopleSex"></result>
-        <result column="class" property="peopleClass"></result>
-        <result column="classify" property="peopleGroup"></result>
-        <result column="introduction" property="peopleIntro"></result>
-        <result column="picUrl" property="picUrl"></result>
+
+        <result column="introduction" property="str"></result>
+
     </resultMap>
     <select id="findLabMemberByPage" resultMap="memberMap">
-      select * from tb_lab_member  limit ${pageNum},${pageSize}
+      select realname,introduction from tb_lab_member  order by class  limit ${pageNum},${pageSize}
     </select>
     <select id="findTotalMember" resultType="int">
         select count(*) from tb_lab_member

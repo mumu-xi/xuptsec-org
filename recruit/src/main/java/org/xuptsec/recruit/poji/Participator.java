@@ -15,9 +15,7 @@ public class Participator implements Serializable {
     @Size(min = 2,max=10)
     @NotEmpty(message ="{stuname.not.empty}")
     private String stuName;
-    /**
-     * 为了以后微信接入方便，获取表单时的 1 代表男，2 代表女，逻辑层转换为汉字
-     */
+
     @NotEmpty
     @Size(max=4)
     private String stuSex;

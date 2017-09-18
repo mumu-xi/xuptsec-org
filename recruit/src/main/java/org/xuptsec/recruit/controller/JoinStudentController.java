@@ -14,7 +14,6 @@ import org.xuptsec.recruit.poji.ResultJoin;
 import org.xuptsec.recruit.service.ParticipatorService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.io.File;
 
 /**
@@ -34,10 +33,17 @@ public class JoinStudentController {
      */
     @RequestMapping(value="/insert",method = RequestMethod.POST)
     public @ResponseBody
-    ResultJoin insertParticipator(@RequestBody  @Valid Participator participator){
+    ResultJoin insertParticipator(@RequestBody /* @Valid*/ Participator participator){
         return participatorService.insertParticipator(participator);
     }
 
+    /**
+     * 下载面试题
+     * @param request
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value="/download")
     public ResponseEntity<byte[]> download(HttpServletRequest request,
                                            Model model)throws Exception {

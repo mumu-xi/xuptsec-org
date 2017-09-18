@@ -3,9 +3,11 @@ package org.xuptsec.recruit.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.xuptsec.recruit.dao.MemberMapper;
+import org.xuptsec.recruit.poji.Member;
 import org.xuptsec.recruit.poji.ResultList;
-import org.xuptsec.recruit.service.ManagerService;
 import org.xuptsec.recruit.service.MemberService;
+
+import java.util.List;
 
 /**
  * Created by mu on 2017/9/16.
@@ -23,7 +25,14 @@ public class MemberServiceImpl implements MemberService {
     public ResultList findLabMemberByPage(int pageNum, int pageSize) {
         ResultList result = new ResultList();
         try {
-            result.setData(memberMapper.findLabMemberByPage((pageNum - 1) * pageSize, pageSize));
+            List<Member> list = memberMapper.findLabMemberByPage((pageNum - 1) * pageSize, pageSize);
+            for (Member member:
+                 list) {
+                String[] split = member.getStr().split("，");
+                member.setStr("");
+                member.setPeopleIntro(split);
+            }
+            result.setData(list);
             result.setTotal(memberMapper.findTotalMember());
             result.setState("true");
             result.setMessage("请求成功");
