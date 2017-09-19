@@ -143,7 +143,6 @@ public class ManagerController {
     @RequestMapping("/find")
     public @ResponseBody
     ResultList findParticipator(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum, @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
-
         return managerService.findParticipatorByPage(pageNum, pageSize);
     }
 

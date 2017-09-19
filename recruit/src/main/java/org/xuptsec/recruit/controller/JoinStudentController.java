@@ -35,6 +35,7 @@ public class JoinStudentController {
     @RequestMapping(value="/insert",method = RequestMethod.POST)
     public @ResponseBody
     ResultJoin insertParticipator(@RequestBody  @Valid Participator participator){
+
         return participatorService.insertParticipator(participator);
     }
 

@@ -31,4 +31,6 @@ public interface ParticipatorMapper {
      * @return
      */
     List<Participator> findParticipatorAll();
+
+    int findParticipatorByStuNum(@Param("stuNumber") String stuNumber);
 }

@@ -2,6 +2,7 @@ package org.xuptsec.recruit.poji;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -10,12 +11,16 @@ import javax.validation.constraints.Size;
 public class Login {
     @NotEmpty()
     @Size(max=20)
+    @Pattern(regexp = "\\w+")
     private String username;
     @NotEmpty()
     @Size(max=20)
+    @Pattern(regexp = "\\w+")
     private String password;
    /* @NotEmpty()
+   @Pattern(regexp = "\\d+")
     @Size(max=10)*/
+
     private String verification;
 
     @Override

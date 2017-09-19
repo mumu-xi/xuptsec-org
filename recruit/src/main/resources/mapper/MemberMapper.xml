@@ -10,7 +10,7 @@
         <result column="picUrl" property="picUrl"></result>
     </resultMap>
     <select id="findLabMemberByPage" resultMap="memberMap">
-      select * from tb_lab_member  order by class  limit ${pageNum},${pageSize}
+      select * from tb_lab_member  order by class,realname  limit ${pageNum},${pageSize}
     </select>
     <select id="findTotalMember" resultType="int">
         select count(*) from tb_lab_member

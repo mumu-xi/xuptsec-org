@@ -28,7 +28,7 @@ public class ParticipatorServiceImpl implements ParticipatorService {
         StringBuilder sb = new StringBuilder();
         try {
             //表单验证
-            if(participator==null){
+            if (participator == null) {
                 sb.append("请求参数为空");
             }
             if (participator.getStuName().trim() == "")
@@ -45,16 +45,25 @@ public class ParticipatorServiceImpl implements ParticipatorService {
                 sb.append("电话为空 ");
             if (participator.getStuIntro().trim() == "")
                 sb.append("个人介绍为空。");
-
+            int count = participatorMapper.findParticipatorByStuNum(participator.getStuNumber());
+            if(count>0){
+                result.setMessage("你的热情我们可以理解，请不要重复报名。");
+            }
+           else if(count == 0) {
             /*
              * 为了以后微信接入方便，获取表单时的 1 代表男，2 代表女，在此处转换为汉字
              */
-            String sex = participator.getStuSex().trim();
-            if ((sex == "1") || (sex == "2"))
-                participator.setStuSex("1".equals(sex) ? "男" : "女");
-            participatorMapper.insertParticipator(participator);
+                String sex = participator.getStuSex().trim();
+                if ((sex == "1") || (sex == "2"))
+                    participator.setStuSex("1".equals(sex) ? "男" : "女");
+
+
+                participatorMapper.insertParticipator(participator);
+                result.setMessage("报名成功");
+            }
+
+
             result.setState("true");
-            result.setMessage("报名成功");
         } catch (Exception e) {
             result.setState("false");
             result.setMessage("非常抱歉，报名失败了，请再试一次。");
@@ -65,8 +74,10 @@ public class ParticipatorServiceImpl implements ParticipatorService {
             return result;
         }
     }
+
     /**
      * 查找所有已报名学生的信息
+     *
      * @return
      */
     public List<Participator> findParticipatorAll() {

@@ -1,15 +1,15 @@
 package org.xuptsec.recruit.controller;
 
-import com.alibaba.fastjson.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.xuptsec.recruit.poji.ResultList;
 import org.xuptsec.recruit.service.MemberService;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * Created by mu on 2017/9/16.
@@ -28,14 +28,8 @@ public class MemberController {
      * @return
      */
     @RequestMapping("/find")
-    public String findLabMemberByPage(HttpServletResponse response,@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10") int pageSize){
-        String json = JSONArray.toJSON(memberService.findLabMemberByPage(pageNum, pageSize)).toString();
-        try {
-            response.getWriter().print(json);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "index";
+    public @ResponseBody ResultList findLabMemberByPage(HttpServletResponse response, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10") int pageSize){
+       return  memberService.findLabMemberByPage(pageNum, pageSize);
     }
 
 }

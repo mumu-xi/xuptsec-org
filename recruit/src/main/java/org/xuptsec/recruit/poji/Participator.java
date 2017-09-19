@@ -13,14 +13,17 @@ import java.io.Serializable;
 public class Participator implements Serializable {
     private String stuId;
     @Size(min = 2,max=10)
-    @NotEmpty(message ="{stuname.not.empty}")
+    @Pattern(regexp = "[\\u4e00-\\u9fa5]+")
+    @NotEmpty()
     private String stuName;
 
     @NotEmpty
     @Size(max=4)
+    @Pattern(regexp = "[\\u4e00-\\u9fa5]+")
     private String stuSex;
     @NotEmpty
     @Size(max=30)
+    @Pattern(regexp = "[\\w\\u4e00-\\u9fa5]+")
     private String stuClass;
     @NotEmpty
     @Pattern(regexp = "\\d{6,10}")
@@ -30,8 +33,10 @@ public class Participator implements Serializable {
     private String stuTel;
     @NotEmpty
     @Size(max=10)
+    @Pattern(regexp = "[\\u4e00-\\u9fa5]*")
     private String stuGroup;
     @Size(max=512)
+    @Pattern(regexp = "[\\u4e00-\\u9fa5]*")
     private String stuIntro;
 
     @Override
