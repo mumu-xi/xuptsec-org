@@ -16,8 +16,10 @@ const definePlugin = new webpack.DefinePlugin({
   'process.env': {
     NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production')
   }
+
 });
 const uglifyPlugin = new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } });
+const AggressiveMergingPlugin = new webpack.optimize.AggressiveMergingPlugin();
 const compressionPlugin = new CompressionPlugin();
 
 module.exports = {
@@ -35,6 +37,7 @@ module.exports = {
     definePlugin,
     uglifyPlugin,
     compressionPlugin,
+    AggressiveMergingPlugin,
     new ZipPlugin({
       path: path.join(__dirname, 'dist'),
       filename: 'dist.zip'

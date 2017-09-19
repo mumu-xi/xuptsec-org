@@ -41,7 +41,13 @@
     .qrWrapper {
       display: flex;
       align-items: center;
-      justify-content: space-evenly;
+      justify-content: center;
+    }
+    .qrWrapper p{
+      margin-right: 20px;
+    }
+    .qr{
+      margin-left: 20px;
     }
     .qr{
       width: 70px;
@@ -62,6 +68,4 @@
       margin-top: 0px;
     }
   }
-/*@media all and (orientation : landscape){
-  height: 30px;
-}*/
+

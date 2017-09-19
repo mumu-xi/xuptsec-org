@@ -78,7 +78,6 @@
     "less": "^2.7.2",
     "less-loader": "^4.0.5",
     "npm": "^5.4.0",
-    "null-loader": "^0.1.1",
     "postal-react-mixin": "^1.0.3",
     "postcss-adaptive": "^0.4.0",
     "postcss-loader": "^2.0.6",
