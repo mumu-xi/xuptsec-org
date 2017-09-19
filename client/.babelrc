@@ -3,6 +3,7 @@
   "env": {
     "development": {
       "plugins": [
+        ["import", { "libraryName": "antd", "style": "css" }],
         ["react-transform", {
           "transforms": [
             {

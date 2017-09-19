@@ -38,13 +38,22 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        query: {
-          plugins: [
-            ['import', { libraryName: 'antd', style: 'css' }] // `style: true` 会加载 less 文件
-          ]
-        }
       },
-      { test: /\.css$/, loader: stylesheetsLoader },
+      {
+        test: /\.css$/,
+        use: [
+            { loader: 'style-loader' },
+            { loader: 'css-loader', options: { modules: true, importLoaders: 1 } },
+            { loader: 'postcss-loader', options: { config: { path: 'path/to/postcss.config.js' } } }
+        ],
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        include: /node_modules/
+      },
+
       { test: /\.scss$/, loader: `${stylesheetsLoader}'!sass` },
       { test: /\.sass$/, loader: `${stylesheetsLoader}'!sass?indentedSyntax=sass` },
       { test: /\.less$/, loader: `${stylesheetsLoader}'!less` },

@@ -58,7 +58,8 @@ class Index extends Component {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(value),
-        credentials: 'same-origin',
+        // credentials: 'include',
+        credentials: 'same-origin'
       }).then((res) => res.json()).then((res) => {
         const { state } = res;
         this.setState({ loading: false });
@@ -66,6 +67,7 @@ class Index extends Component {
           message.success(`${value.stuName}同学，你已经报名成功啦，等待近期面试通知~`);
           browserHistory.push('/');
         } else {
+          this.setState({ loading: false });
           message.error('报名失败');
         }
       }).catch((error) => {
@@ -110,13 +112,18 @@ class Index extends Component {
             {getFieldDecorator('stuNumber', {
               rules: [{
                 required: true, message: '请输入学号',
-              }]
+              }, {
+                pattern: /^\d{6,8}$/, message: '你确定学号正确嘛~'
+              }],
+              validateTrigger: 'onBlur',
             })(<Input placeholder="请输入学号" styleName="input" />)}
           </FormItem>
           <FormItem >
             {getFieldDecorator('stuTel', {
               rules: [{
                 required: true, message: '请输入电话号码',
+              }, {
+                pattern: /^\d{10,11}$/, message: '请输入正确的手机号码噢~'
               }]
             })(<Input placeholder="联系电话" styleName="input" />)}
           </FormItem>
@@ -134,7 +141,7 @@ class Index extends Component {
               }]
             })(<TextArea rows={7} placeholder="自我介绍" styleName="textarea" />)}
           </FormItem>
-          <Button type="primary" htmlType="submit" stylesName="signUpBtn">
+          <Button type="primary" htmlType="submit" styleName="signUpBtn">
              报名
           </Button>
         </Form>

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Table, message } from 'antd';
+import { browserHistory } from 'react-router';
+import PostalReactMixin from 'postal-react-mixin';
 import 'whatwg-fetch';
 import appendQuery from 'append-query';
 import config from '../../config';
 
-const { getStudents } = config.api;
+const { getStudents } = config.api.admin;
 const columns = [
   { title: '姓名', dataIndex: 'stuName' },
   { title: '性别', dataIndex: 'stuSex' },
@@ -15,23 +17,31 @@ const columns = [
 ];
 
 class Index extends Component {
+  mixins: [PostalReactMixin]
   state = {
     data: [],
     pagination: {},
-    loading: false
+    loading: false,
+    isLogined: false
   }
+
   componentDidMount() {
-    this.getData();
+    subscriptions: {
+      changeLoginState = (data) => {
+        this.setState({ isLogined: data.isLogined });
+      };
+    }
+    if (this.state.isLogined) {
+      this.getData();
+    }
   }
   getData = (params = {}) => {
-    // console.log('params',params);
     this.setState({ loading: true });
     const url = appendQuery(getStudents, {
       pageNum: 1, ...params
     }, { removeNull: true });
     fetch(url).then(res => res.json()).then((res) => {
       const { data, total, state } = res;
-      // console.log(res);
       if (state === 'true') {
         const pagination = { ...this.state.pagination };
         pagination.total = total;
@@ -46,6 +56,7 @@ class Index extends Component {
       message.error(error);
     });
   }
+
   handleChange = (pagination) => {
     const paper = { ...this.state.pagination };
     paper.current = pagination.current;
@@ -61,13 +72,16 @@ class Index extends Component {
   render() {
     return (
       <div>
-        <Table
-          dataSource={this.state.data}
-          columns={columns}
-          onChange={this.handleChange}
-          pagination={this.state.pagination}
-          rowKey={record => record.stuName}
-        />
+        {
+          this.state.isLogined
+          ? <Table
+            dataSource={this.state.data}
+            columns={columns}
+            onChange={this.handleChange}
+            pagination={this.state.pagination}
+            rowKey={record => record.stuName}
+          /> : <div>{browserHistory.push('/404')}</div>
+        }
       </div>
     );
   }

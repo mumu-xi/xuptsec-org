@@ -17,28 +17,29 @@
   background: #ececec;
 }
 .input {
-  border: none;
-  background: #ececec;
-  border-bottom: 2px solid #404040;
-  border-radius: 0;
-  text-align: center;
+  border: none!important;
+  background: #ececec!important;
+  border-bottom: 2px solid #404040!important;
+  border-radius: 0 !important;
+  text-align: center!important;
 }
 .input::placeholder {
   text-align: center;
 }
 
 .input:hover, .input:visited, .input:focus {
-  border: none;
-  border-bottom: 2px solid #49a9ee;
-  box-shadow: none;
+  border: none!important;
+  border-bottom: 2px solid #49a9ee!important;
+  box-shadow: none!important;
 }
 .input::selection {
-  border: none;
+  border: none!important;
 }
 .textarea {
   display: block;
-  border: 2px solid #404040;
-  border-radius: 5px;
+  border: 2px solid #404040!important;
+  border-radius: 5px!important;
+  background-color: #ececec!important;
   margin-top:50px;
   padding-top: 20px;
 }
@@ -63,16 +64,17 @@
     width: 450px;
   }
   .input {
-  padding: 30px 0;
+  padding: 30px 0!important;
   }
   .input, .textarea,.input::placeholder, .textarea::placeholder, .signUpBtn {
     font-size: 16px;
   }
   .requireWrapper{
-    width: 70vw;
+    width: 80vw;
   }
   .description{
-    width: 50vw;
+    width: 70vw;
+    font-size: 16px;
   }
 }
 @media screen and (max-width:768px) {
@@ -84,7 +86,7 @@
     width: 300px;
   }
   .input {
-   padding: 20px 0;
+   padding: 20px 0!important;
   }
   .input, .textarea,.input::placeholder, .textarea::placeholder, .signUpBtn{
     font-size: 12px;
@@ -93,14 +95,14 @@
     width: 100vw;
   }
   .description{
-    width: 70vw;
+    width: 60vw;
+    font-size: 12px;
   }
 }
 /*----------require---------*/
 
 .requireWrapper{
-  margin: 0 auto;
-  margin-top:100px;
+  margin: 100px auto;
 }
 .stepIndex{
   float: left;
@@ -118,14 +120,13 @@
   background-position: center;
   background-size: 2px 10px;
   background-repeat: repeat-y;
-  padding: 5px 20px 500px 20px;
+  padding: 5px 20px 300px 20px;
   margin-top: -20px;
   margin-left: 8px;
 }
 .description{
   float: right;
   margin-left: 12px;
-  font-size: 14px;
   letter-spacing: -0.4px;
 }
 
@@ -135,19 +136,55 @@
   display: table;
 }
 .requireTitle{
-  height: 24px;
   font-size: 24px;
   font-weight: bold;
   letter-spacing: 0.4px;
   color: rgba(13, 12, 55, 0.82);
   margin-bottom: 14px;
 }
+.requireIntro{
+  padding: 10px 0;
+}
+.requireIntro::before{
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: rgb(130, 218, 133);
+}
+@media screen and (min-width:768px){
+  .requireTitle{
+    font-size: 24px;
+  }
+}
+@media screen and (max-width:768px){
+  .requireTitle{
+    font-size: 18px;
+  }
+}
+
 /***********************interview.js************************/
-.interviewWrapper,.freeWrapper{
+.interviewWrapper{
   height: 80vh;
+}
+.downBtn{
+  width: 150px;
+  height: 50px;
+  margin: 0 auto;
+  background: #404040;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #FFF;
+  margin-top: 150px;
 }
 /***********************free.js************************/
 .freeWrapper{
+  height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -155,6 +192,4 @@
 .freeQR{
   width: 275px;
   height: 275px;
-  background-size: contain;
-  background: url(../../../public/free.jpg);
 }

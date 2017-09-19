@@ -4,18 +4,25 @@ import styles from './index.css';
 
 class Index extends Component {
   render() {
-    const { data } = this.props;
+    const { data=[] } = this.props;
     return (
       <div styleName="container">
         {
           data.length ? data.map((person) => {
-            const { peopleName, peopleIntro, picurl, peopleId } = person;
+            const { peopleName, peopleIntro, picUrl, peopleId } = person;
             return (
               <div styleName="member" key={peopleId}>
-                <img src={picurl} alt="人物介绍图片" />
+                <img src={picUrl} alt="人物介绍图片" />
                 <div styleName="info">
                   <h2>{peopleName}</h2>
-                  <p>{peopleIntro}</p>
+                  <ul styleName="text">
+                    {
+                      peopleIntro.map((text) => (
+                        <li key={text}>{text}</li>
+                        )
+                      )
+                    }
+                  </ul>
                 </div>
               </div>
             );

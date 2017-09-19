@@ -4,7 +4,10 @@
   color: #FFF;
   display: flex;
 }
-
+.qr{
+  background: url('../../../public/qrcode.png');
+  background-size: contain;
+}
 @media screen and (min-width:800px) {
   .footer {
     height: 20vh;
@@ -18,7 +21,7 @@
   .qr{
     width: 90px;
     height: 90px;
-    margin-top: 10px;
+    margin: 10px auto;
   }
   .copyRight{
     flex-grow: 1;
@@ -33,7 +36,7 @@
 @media screen and (max-width:800px) {
     .footer {
       flex-direction: column-reverse;
-      height: 15vh;
+      height: 20vh;
     }
     .qrWrapper {
       display: flex;
@@ -48,7 +51,7 @@
     .copyRight {
       font-size: 12px;
       text-align: center;
-      padding: 5px 0;
+      padding: 15px 0;
       font-size: 10px;
     }
   }
@@ -59,3 +62,6 @@
       margin-top: 0px;
     }
   }
+/*@media all and (orientation : landscape){
+  height: 30px;
+}*/

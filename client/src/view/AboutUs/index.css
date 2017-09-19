@@ -2,7 +2,7 @@
   height: 80vh;
 }
 .title {
-  color: #404040;;
+  color: #FFF;
   text-align: center;
   font-family: Helvetica,Arial,sans-serif;
 }
@@ -11,13 +11,39 @@
   content: '';
   width: 3rem;
   height: 2px;
-  background: #404040;
+  background: #FFF;
   margin: 0 auto;
+}
+.titleBlack{
+  color: #404040;
+  padding-top: 50px;
+}
+.titleBlack::after{
+  background: #404040;
+}
+.dataWrapper{
+  width: 90vw;
+  margin: 0 auto;
+}
+.dataWrapper li {
+  text-align: center;
+}
+.peoplePagination{
+  display: flex;
+  justify-content: center;
+  padding: 30px;
 }
 @media screen and (min-width:768px) {
   .title {
     font-size: 30px;
     padding: 50px 0 30px;
+  }
+  .dataWrapper li {
+    font-size: 16px;
+    padding: 10px 0;
+  }
+  .wrapper{
+    padding-top: 100px;
   }
 }
 @media screen and (max-width:768px) {
@@ -25,4 +51,45 @@
     font-size: 18px;
     padding: 30px 0 40px;
    }
+   .dataWrapper li {
+    font-size: 14px;
+    padding: 6px 0;
+  }
+  .wrapper{
+    padding-top: 50px;
+  }
+}
+.labBg{
+  background: url('../../../public/lab.png');
+  background-size: cover;
+}
+.safeBg{
+  background: url('../../../public/safe.png');
+  background-size: cover;
+}
+.devolpBg{
+  background: url('../../../public/devolop.png');
+  background-size: cover;
+}
+.dataWrapper li {
+  color: #FFF;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fadeInDown {
+  animation: fadeInDown 2s;
+}
+.fadeInDownBefore {
+  animation: fadeInDown 1.7s;
 }

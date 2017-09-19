@@ -5,95 +5,41 @@ import {
   Icon,
   Input,
   Button,
-  message,
+  message
 } from 'antd';
 import 'whatwg-fetch';
 import cssModules from 'react-css-modules';
+import PostalReactMixin from 'postal-react-mixin';
+import { EventEmitter } from 'events';
 import config from '../../config';
 import styles from './index.css';
 
 const FormItem = Form.Item;
-const { login, getVerfic } = config.api.admin;
+const { login } = config.api.admin;
 class Index extends React.Component {
-  state = {
-    disabled: false,
-    inputVal: '点击获取手机验证码',
-    count: 60,
-  };
+  mixins: [PostalReactMixin]
 
-  setTime = () => {
-    if (this.state.count === 0) {
-      this.setState({
-        count: 60,
-        inputVal: '点击获取手机验证码',
-        disabled: false
-      });
-      return;
-    }
-    this.setState({
-      count: this.state.count - 1,
-      inputVal: `重新发送(${this.state.count})s`,
-      disabled: true
-    });
-    setTimeout(() => {
-      this.setTime();
-    }, 1000);
-  }
-
-  getVerification = (e) => {
-    e.preventDefault();
-    this.setTime();
-    // console.log(1);
-    console.log(this.state.username);
-    // debugger;
-    this.props.form.validateFields((err, value) => {
-      if (err) { return false; }
-      const formData = new FormData();
-      formData.append('username', value.username);
-      // console.log(formData);
-
-      fetch(getVerfic, {
-        method: 'POST',
-        mode: 'cors',
-        body: formData
-      }).then((res) => res.json()).then((res) => {
-        // 返回用户数据，登录成功
-        const { state } = res;
-        console.log(res);
-        if (state !== 'false') {
-          message.error(res.message);
-        }
-      })
-      .catch((error) => {
-        message.error(error);
-      });
-    });
-  }
   handleSubmit = (e) => {
     e.preventDefault();
+
     this.props.form.validateFields((err, value) => {
       if (err) { return false; }
-      console.log(value);
-      const formData = new FormData();
-      formData.append('username', value.username);
-      formData.append('password', value.password);
-      formData.append('verification', value.verification);
       fetch(login, {
         method: 'POST',
-        // headers: { 'Content-type': 'application/json' },
-        // body: JSON.stringify(value)
-        body: formData
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(value)
       }).then((res) => res.json()).then((res) => {
-        // 返回用户数据，登录成功
         const { state } = res;
-        console.log(res);
-        if (state === 'true') {
-          // console.log(1);
+        if (state) {
           message.success('登录成功');
+          // 更新当前登录状态
+          this.publish('changeLoginState', {
+            isLogined: true
+          });
+
           browserHistory.push('/admin/students');
         } else {
-          // console.log(2)
-          message.error(res.message);
+          message.error('请求失败');
         }
       })
       .catch((error) => {
@@ -112,6 +58,7 @@ class Index extends React.Component {
             {this.props.form.getFieldDecorator('username', {
               rules: [
                 { required: true, message: '输入用户名' },
+                { min: 6, max: 10, message: '请输入6~10位用户名' }
               ],
               validateTrigger: 'onBlur',
             })(
@@ -128,21 +75,6 @@ class Index extends React.Component {
               <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="Password" />
             )}
           </FormItem>
-          <div style={{ display: 'flex' }}>
-            <FormItem>
-              {this.props.form.getFieldDecorator('verification', {
-
-                validateTrigger: 'onBlur',
-              })(<Input type="text" placeholder="验证码" style={{ width: 100, marginRight: '20px' }} />)}
-            </FormItem>
-            <Input
-              type="button"
-              disabled={this.state.disabled}
-              value={this.state.inputVal}
-              onClick={this.getVerification}
-            />
-          </div>
-
           <Button type="primary" htmlType="submit" styleName="loginBtn">
             登录
           </Button>
@@ -153,4 +85,3 @@ class Index extends React.Component {
 }
 Index.propTypes = {};
 export default Form.create()(cssModules(Index, styles));
-

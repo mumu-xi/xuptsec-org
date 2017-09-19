@@ -48,7 +48,6 @@ class Index extends Component {
         { text: '开发组', link: 'about/development' },
         { text: '安全组', link: 'about/security' }]
       },
-      { text: 'blog', link: '#' }// 放博客链接
     ];
 
     const { route = '' } = this.props;
@@ -58,7 +57,6 @@ class Index extends Component {
         <Menu
           mode="horizontal"
           theme="dark"
-          selectedKeys={route ? [`.$${route}`] : ['.$']}
           styleName="pcMenu"
         >
           {

@@ -14,13 +14,16 @@
 .member h2:after {
   content: "";
   display: block;
-  width: 300px;
+  width:350px;
   height: 2px;
   background-color: #b6222a;
 }
 .member img{
   width: 250px;
 	height: 250px;
+}
+.text{
+  min-height: 200px;
 }
 
 @media screen and (max-width: 800px) {
@@ -36,6 +39,9 @@
   }
   .member p{
     font-size: 14px;
+  }
+  .info li{
+    padding: 5px 0;
   }
 }
 
@@ -77,7 +83,7 @@
 }
 @media (max-width: 768px) {
   .container {
-      width: 98vw;
+      width: 90vw;
   }
 }
 .nodata {

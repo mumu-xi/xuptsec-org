@@ -9,7 +9,7 @@ import styles from './index.css';
          <span styleName="copyRight">&copy; 2009-2017西邮信息安全实验室 All right reserved</span>
          <div styleName="qrWrapper">
            <p>关注我们</p>
-           <img styleName="qr" src="../../../public/qrcode.png" alt="QR" />
+           <div styleName="qr" />
          </div>
        </footer>
      );
