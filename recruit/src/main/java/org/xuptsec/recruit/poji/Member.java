@@ -6,18 +6,29 @@ import java.util.Arrays;
  * Created by mu on 2017/9/16.
  */
 public class Member {
-
+    private String peopleId;
     private String peopleName;
     private String str;
     private String[] peopleIntro;
+    private String picUrl;
 
     @Override
     public String toString() {
         return "Member{" +
-                "peopleName='" + peopleName + '\'' +
+                "peopleId='" + peopleId + '\'' +
+                ", peopleName='" + peopleName + '\'' +
                 ", str='" + str + '\'' +
                 ", peopleIntro=" + Arrays.toString(peopleIntro) +
+                ", picUrl='" + picUrl + '\'' +
                 '}';
+    }
+
+    public String getPeopleId() {
+        return peopleId;
+    }
+
+    public void setPeopleId(String peopleId) {
+        this.peopleId = peopleId;
     }
 
     public String getPeopleName() {
@@ -42,5 +53,13 @@ public class Member {
 
     public void setPeopleIntro(String[] peopleIntro) {
         this.peopleIntro = peopleIntro;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
 }

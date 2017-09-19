@@ -14,6 +14,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
@@ -88,7 +89,7 @@ public class ManagerController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public @ResponseBody
-    ResultLogin managerLogin(HttpServletResponse response, HttpServletRequest request, @RequestBody /*@Valid*/ Login login) {
+    ResultLogin managerLogin(HttpServletResponse response, HttpServletRequest request, /*@RequestBody*/ @Valid Login login) {
         ResultLogin result = new ResultLogin("请求失败", "false");
         try {
             HttpSession session = request.getSession();
@@ -176,6 +177,9 @@ public class ManagerController {
         cell.setCellStyle(style);
         cell = row.createCell(4);
         cell.setCellValue("选择组别");
+        cell.setCellStyle(style);
+        cell = row.createCell(5);
+        cell.setCellValue("签到");
         cell.setCellStyle(style);
         // 第五步，写入实体数据 实际应用中这些数据从数据库得到，
         List<Participator> list = participatorService.findParticipatorAll();
