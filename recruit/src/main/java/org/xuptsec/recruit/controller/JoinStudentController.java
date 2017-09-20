@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.xuptsec.recruit.poji.Participator;
 import org.xuptsec.recruit.poji.ResultJoin;
@@ -34,8 +35,11 @@ public class JoinStudentController {
      */
     @RequestMapping(value="/insert",method = RequestMethod.POST)
     public @ResponseBody
-    ResultJoin insertParticipator(@RequestBody  @Valid Participator participator){
-
+    ResultJoin insertParticipator(@RequestBody  @Valid Participator participator,BindingResult result){
+        if(result.hasErrors()){
+            return new ResultJoin("false","表单验证失败" );
+        }
+        participator.setStuIntro(participator.getStuIntro().replace(">","").replace("/","").replace("'","").replace("\"",""));
         return participatorService.insertParticipator(participator);
     }
 

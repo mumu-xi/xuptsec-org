@@ -4,12 +4,12 @@
 <mapper namespace="org.xuptsec.recruit.dao.ManagerMapper">
 
     <select id="managerLogin" resultType="manager">
-        select * from tb_manager where username=#{username} and password=#{password}
+        select * from tb_manager where visibility=0 and username=#{username} and password=#{password}
     </select>
 
 
     <select id="findManagerTelByUsername" parameterType="java.lang.String" resultType="java.lang.String">
-        select tel from tb_manager where username=#{username}
+        select tel from tb_manager where visibility=0 and username=#{username}
     </select>
 
 </mapper>

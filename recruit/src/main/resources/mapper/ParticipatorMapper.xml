@@ -31,6 +31,6 @@
          select * from tb_participator ORDER BY realname,tel
     </select>
     <select id="findParticipatorByStuNum" resultType="int">
-        select count(*) from tb_participator where number=#{stuNumber}
+        select count(*) from tb_participator where number=#{stuNumber} and realname=#{stuName}
     </select>
 </mapper>

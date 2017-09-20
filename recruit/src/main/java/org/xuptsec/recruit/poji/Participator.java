@@ -23,7 +23,7 @@ public class Participator implements Serializable {
     private String stuSex;
     @NotEmpty
     @Size(max=30)
-    @Pattern(regexp = "[\\w\\u4e00-\\u9fa5]+")
+    @Pattern(regexp = "[\\d\\u4e00-\\u9fa5]+")
     private String stuClass;
     @NotEmpty
     @Pattern(regexp = "\\d{6,10}")

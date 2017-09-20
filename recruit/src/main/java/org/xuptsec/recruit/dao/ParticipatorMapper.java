@@ -32,5 +32,11 @@ public interface ParticipatorMapper {
      */
     List<Participator> findParticipatorAll();
 
-    int findParticipatorByStuNum(@Param("stuNumber") String stuNumber);
+    /**
+     * 根据学号查询是否有该学生
+     * @param stuNumber
+     * @param stuName
+     * @return
+     */
+    int findParticipatorByStuNum(@Param("stuNumber") String stuNumber,@Param("stuName")  String stuName);
 }

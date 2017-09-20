@@ -25,27 +25,9 @@ public class ParticipatorServiceImpl implements ParticipatorService {
      */
     public ResultJoin insertParticipator(Participator participator) {
         ResultJoin result = new ResultJoin();
-        StringBuilder sb = new StringBuilder();
         try {
-            //表单验证
-            if (participator == null) {
-                sb.append("请求参数为空");
-            }
-            if (participator.getStuName().trim() == "")
-                sb.append("名字为空 ");
-            if (participator.getStuClass().trim() == "")
-                sb.append("班级为空 ");
-            if (participator.getStuGroup().trim() == "")
-                sb.append("选择组别为空 ");
-            if (participator.getStuNumber().trim() == "")
-                sb.append("学号为空 ");
-            if (participator.getStuSex().trim() == "")
-                sb.append("性别为空 ");
-            if (participator.getStuTel().trim() == "")
-                sb.append("电话为空 ");
-            if (participator.getStuIntro().trim() == "")
-                sb.append("个人介绍为空。");
-            int count = participatorMapper.findParticipatorByStuNum(participator.getStuNumber());
+
+            int count = participatorMapper.findParticipatorByStuNum(participator.getStuNumber(),participator.getStuName());
             if(count>0){
                 result.setMessage("你的热情我们可以理解，请不要重复报名。");
             }

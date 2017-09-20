@@ -3,6 +3,7 @@ package org.xuptsec.recruit.controller;
 import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.xuptsec.recruit.poji.*;
 import org.xuptsec.recruit.service.ManagerService;
@@ -89,8 +90,15 @@ public class ManagerController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public @ResponseBody
-    ResultLogin managerLogin(HttpServletResponse response, HttpServletRequest request, /*@RequestBody*/ @Valid Login login) {
-        ResultLogin result = new ResultLogin("请求失败", "false");
+    ResultLogin managerLogin(HttpServletResponse response, HttpServletRequest request, /*@RequestBody*/ @Valid Login login,BindingResult result) {
+
+
+        ResultLogin resultLogin = new ResultLogin("请求失败", "false");
+        if(result.hasErrors()){
+            resultLogin.setMessage("表单验证失败");
+            return resultLogin;
+        }
+
         try {
             HttpSession session = request.getSession();
             Manager manager = managerService.managerLogin(login.getUsername(), login.getPassword());
@@ -115,22 +123,21 @@ public class ManagerController {
                 cookies.setPath("/");
                 cookies.setMaxAge(900);
                 response.addCookie(cookies);
-                result.setState("true");
-                result.setMessage("登录成功");
+                resultLogin.setState("true");
+                resultLogin.setMessage("登录成功");
             } else {
-                result.setState("false");
-                result.setMessage("账号或密码错误！");
+                resultLogin.setState("false");
+                resultLogin.setMessage("账号或密码错误！");
             }
          /*   }
             else{
-                result.setState("false");
-                result.setMessage("手机验证码错误！");
+                resultLogin.setState("false");
+                resultLogin.setMessage("手机验证码错误！");
             }*/
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            return result;
         }
+        return resultLogin;
     }
 
     /**
@@ -178,7 +185,7 @@ public class ManagerController {
         cell.setCellValue("选择组别");
         cell.setCellStyle(style);
         cell = row.createCell(5);
-        cell.setCellValue("签到");
+        cell.setCellValue("个人介绍");
         cell.setCellStyle(style);
         // 第五步，写入实体数据 实际应用中这些数据从数据库得到，
         List<Participator> list = participatorService.findParticipatorAll();
@@ -193,6 +200,7 @@ public class ManagerController {
             row.createCell(2).setCellValue(par.getStuClass());
             row.createCell(3).setCellValue(par.getStuTel());
             row.createCell(4).setCellValue(par.getStuGroup());
+            row.createCell(5).setCellValue(par.getStuIntro());
         }
         //第六步,输出Excel文件
         OutputStream output = response.getOutputStream();
