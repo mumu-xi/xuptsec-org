@@ -36,7 +36,6 @@ public class Participator implements Serializable {
     @Pattern(regexp = "[\\u4e00-\\u9fa5]*")
     private String stuGroup;
     @Size(max=512)
-    @Pattern(regexp = "[\\u4e00-\\u9fa5]*")
     private String stuIntro;
 
     @Override
