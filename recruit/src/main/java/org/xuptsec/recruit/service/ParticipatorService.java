@@ -2,8 +2,8 @@ package org.xuptsec.recruit.service;
 
 import org.xuptsec.recruit.poji.Participator;
 import org.xuptsec.recruit.poji.ResultJoin;
+import org.xuptsec.recruit.poji.ResultList;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -23,5 +23,13 @@ public interface ParticipatorService {
      * @return
      */
     List<Participator> findParticipatorAll();
+
+    /**
+     * 通知报名者面试时间，查询部分信息
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    ResultList findNoticeParticipator(int pageNum, int pageSize);
 
 }

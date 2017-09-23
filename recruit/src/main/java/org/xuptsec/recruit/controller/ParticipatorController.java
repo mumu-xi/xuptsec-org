@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.xuptsec.recruit.poji.Participator;
 import org.xuptsec.recruit.poji.ResultJoin;
+import org.xuptsec.recruit.poji.ResultList;
 import org.xuptsec.recruit.service.ParticipatorService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +25,7 @@ import java.io.File;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @Controller
 @RequestMapping("/api/participator")
-public class JoinStudentController {
+public class ParticipatorController {
     @Autowired
     private ParticipatorService participatorService;
 
@@ -39,10 +40,21 @@ public class JoinStudentController {
         if(result.hasErrors()){
             return new ResultJoin("false","表单验证失败" );
         }
-        participator.setStuIntro(participator.getStuIntro().replace(">","").replace("/","").replace("'","").replace("\"",""));
+        participator.setStuIntro(participator.getStuIntro().replace(">","？").replace("/","？").replace("'","？").replace("\"","？").replace("cript","？"));
         return participatorService.insertParticipator(participator);
     }
 
+    /**
+     * 通知报名者面试时间，查询部分信息
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping("/schedule")
+    public @ResponseBody
+    ResultList findNoticeParticipator(@RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum, @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize) {
+        return participatorService.findNoticeParticipator(pageNum, pageSize);
+    }
     /**
      * 下载安全组免试题
      * @param request

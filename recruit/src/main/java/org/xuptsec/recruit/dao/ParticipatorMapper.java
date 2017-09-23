@@ -2,6 +2,7 @@ package org.xuptsec.recruit.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import org.xuptsec.recruit.poji.NoticeParticipator;
 import org.xuptsec.recruit.poji.Participator;
 
 import java.util.List;
@@ -39,4 +40,10 @@ public interface ParticipatorMapper {
      * @return
      */
     int findParticipatorByStuNum(@Param("stuNumber") String stuNumber,@Param("stuName")  String stuName);
+
+    /**
+     *通知报名者面试时间，查询部分信息
+     * @return
+     */
+    List<NoticeParticipator>  findNoticeParticipator(@Param("pageNum") int pageNum, @Param("pageSize") int pageSize);
 }

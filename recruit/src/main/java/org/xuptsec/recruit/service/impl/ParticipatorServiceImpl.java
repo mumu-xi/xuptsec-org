@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.xuptsec.recruit.dao.ParticipatorMapper;
 import org.xuptsec.recruit.poji.Participator;
 import org.xuptsec.recruit.poji.ResultJoin;
+import org.xuptsec.recruit.poji.ResultList;
 import org.xuptsec.recruit.service.ParticipatorService;
 
 import java.util.List;
@@ -64,6 +65,27 @@ public class ParticipatorServiceImpl implements ParticipatorService {
      */
     public List<Participator> findParticipatorAll() {
         return participatorMapper.findParticipatorAll();
+    }
+
+    /**
+     * 通知报名者面试时间，查询部分信息
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    public ResultList findNoticeParticipator(int pageNum, int pageSize) {
+        ResultList result = new ResultList();
+        try {
+            result.setData(participatorMapper.findNoticeParticipator((pageNum - 1) * pageSize, pageSize));
+            result.setTotal(participatorMapper.findTotalParticipator());
+            result.setState("true");
+            result.setMessage("请求成功");
+        } catch (Exception e) {
+            result.setState("false");
+            result.setMessage("请求失败");
+            e.printStackTrace();
+        }
+        return result;
     }
 
 

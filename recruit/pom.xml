@@ -276,6 +276,21 @@
       <artifactId>poi-ooxml</artifactId>
       <version>3.14</version>
     </dependency>
+
+
+  <!--  <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>3.10-FINAL</version>
+    </dependency>-->
+    <!-- 这个不支持xlsx 2007以上的格式 -->
+     <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi</artifactId>
+        <version>3.10-FINAL</version>
+    </dependency>
+
+
   </dependencies>
   <build>
     <finalName>recruit</finalName>

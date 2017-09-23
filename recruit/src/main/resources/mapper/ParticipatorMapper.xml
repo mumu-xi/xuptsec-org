@@ -33,4 +33,7 @@
     <select id="findParticipatorByStuNum" resultType="int">
         select count(*) from tb_participator where number=#{stuNumber} and realname=#{stuName}
     </select>
+    <select id="findNoticeParticipator" resultType="noticeParticipator">
+        select id,realname stuName,gender stuSex,class stuClass,classify stuGroup,time_table schedule from tb_participator where visibility>=0  order by convert(time_table using gbk) ,convert(classify using gbk), convert(realname using gbk)  limit ${pageNum},${pageSize}
+    </select>
 </mapper>

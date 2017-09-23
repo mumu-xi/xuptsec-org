@@ -52,7 +52,7 @@ public class ManagerController {
             if (stuTel != "" || stuTel != null) {
                 //生成验证码
                 String verification = String.valueOf(new Random().nextInt(89999) + 10000);
-               // SendMessageUtil.sendMessage(stuTel, verification);
+              //  SendMessageUtil.sendMessage(stuTel, verification);
                 String key = MD5Util.md5("code" + stuTel);
                 session.setAttribute(key, verification);
 
@@ -108,8 +108,8 @@ public class ManagerController {
             System.out.println("key: " + key);
             String codeValue = (String) session.getAttribute(key);
             System.out.println("登录 sessionId= " + session.getId());
-           /* System.out.println(login.getVerification()+","+codeValue);
-            if (codeValue != null && codeValue.equals(login.getVerification())) {*/
+            System.out.println(login.getVerification()+","+codeValue);
+            if (codeValue != null && codeValue.equals(login.getVerification())) {
             session.removeAttribute("code" + stuTel);
             if (manager != null) {
                 session.setAttribute("manager", manager);
@@ -129,11 +129,11 @@ public class ManagerController {
                 resultLogin.setState("false");
                 resultLogin.setMessage("账号或密码错误！");
             }
-         /*   }
+           }
             else{
                 resultLogin.setState("false");
                 resultLogin.setMessage("手机验证码错误！");
-            }*/
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -153,6 +153,11 @@ public class ManagerController {
         return managerService.findParticipatorByPage(pageNum, pageSize);
     }
 
+    /**
+     * 下载报名人表格
+     * @param response
+     * @throws IOException
+     */
     @RequestMapping("/downloadInfo")
     public void createExcel(HttpServletResponse response) throws IOException {
         // 第一步，创建一个webbook，对应一个Excel文件
@@ -213,4 +218,95 @@ public class ManagerController {
         wb.write(output);
         output.close();
     }
+    /*@RequestMapping("/downloadInfo")
+    public void createExcel(HttpServletResponse response) throws IOException {
+        // 第一步，创建一个webbook，对应一个Excel文件
+        HSSFWorkbook wb = new HSSFWorkbook();
+        // 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet
+        HSSFSheet sheet = wb.createSheet("报名名单");
+        // 第三步，在sheet中添加表头第0行,注意老版本poi对Excel的行数列数有限制short
+        HSSFRow row = sheet.createRow(0);
+        // 第四步，创建单元格，并设置值表头 设置表头居中
+        HSSFCellStyle style = wb.createCellStyle();
+        style.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个居中格式
+
+        sheet.setDefaultRowHeightInPoints(12);//设置缺省列高
+        sheet.setDefaultColumnWidth(15);//设置缺省列宽
+        HSSFCell cell = row.createCell(0);
+        cell.setCellValue("姓名");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(2);
+        cell.setCellValue("专业班级");
+        cell.setCellStyle(style);
+        cell = row.createCell(3);
+        cell.setCellValue("电话号码");
+        cell.setCellStyle(style);
+        cell = row.createCell(4);
+        cell.setCellValue("选择组别");
+        cell.setCellStyle(style);
+        cell = row.createCell(5);
+        cell.setCellValue("个人介绍");
+        cell.setCellStyle(style);
+        //设置指定列的列宽，256 * 50这种写法是因为width参数单位是单个字符的256分之一
+     //   sheet.setColumnWidth(cell.getColumnIndex(), 256 * 100);
+
+        // 第五步，写入实体数据 实际应用中这些数据从数据库得到，
+        List<Participator> list = participatorService.findParticipatorAll();
+
+        for (int i = 0; i < list.size()*4; i+=4) {
+            row = sheet.createRow(i + 1);
+
+            Participator par = list.get(i/4);
+            // 第四步，创建单元格，并设置值
+            row.createCell(0).setCellValue("姓名");
+            sheet.setColumnWidth(cell.getColumnIndex(), 256 * 10);
+            row.createCell(1).setCellValue(par.getStuName());
+            sheet.setColumnWidth(cell.getColumnIndex(), 256 * 20);
+            row.createCell(2).setCellValue("班级");
+            sheet.setColumnWidth(cell.getColumnIndex(), 256 * 10);
+            row.createCell(3).setCellValue(par.getStuClass());
+            sheet.setColumnWidth(cell.getColumnIndex(), 256 * 20);
+            row = sheet.createRow(i + 2);
+            row.createCell(0).setCellValue("组别");
+            sheet.setColumnWidth(cell.getColumnIndex(), 256 * 10);
+            row.createCell(1).setCellValue(par.getStuGroup());
+            sheet.setColumnWidth(cell.getColumnIndex(), 256 * 20);
+            row.createCell(2).setCellValue("电话");
+            sheet.setColumnWidth(cell.getColumnIndex(), 256 * 10);
+            row.createCell(3).setCellValue(par.getStuTel());
+            sheet.setColumnWidth(cell.getColumnIndex(), 256 * 20);
+          *//*  row = sheet.createRow(i + 3);
+
+                sheet.createRow(i).setHeightInPoints(100);
+                sheet.addMergedRegion(new CellRangeAddress(i+3,i+3, 0, 4));
+            row = sheet.createRow(i + 4);
+
+            sheet.createRow(i).setHeightInPoints(200);
+            sheet.addMergedRegion(new CellRangeAddress(i+3,i+3, 0, 4));*//*
+
+            style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+            style.setBorderBottom(HSSFCellStyle.BORDER_MEDIUM);
+            style.setBottomBorderColor(HSSFColor.BLACK.index);
+            style.setBorderLeft(HSSFCellStyle.BORDER_MEDIUM);
+            style.setLeftBorderColor(HSSFColor.BLACK.index);
+            style.setBorderRight(HSSFCellStyle.BORDER_MEDIUM);
+            style.setRightBorderColor(HSSFColor.BLACK.index);
+            style.setBorderTop(HSSFCellStyle.BORDER_MEDIUM);
+            style.setTopBorderColor(HSSFColor.BLACK.index);
+            cell.setCellStyle(style);
+
+        }
+        //第六步,输出Excel文件
+        OutputStream output = response.getOutputStream();
+        response.reset();
+        long filename = System.currentTimeMillis();
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//设置日期格式
+        String fileName = df.format(new Date());// new Date()为获取当前系统时间
+        response.setHeader("Content-disposition", "attachment; filename=" + fileName + ".xls");
+        response.setContentType("application/msexcel");
+        wb.write(output);
+        output.close();
+    }*/
+
 }

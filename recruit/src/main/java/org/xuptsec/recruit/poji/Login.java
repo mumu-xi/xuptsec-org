@@ -17,20 +17,11 @@ public class Login {
     @Size(max=20)
     @Pattern(regexp = "\\w+")
     private String password;
-   /* @NotEmpty()
+    @NotEmpty()
    @Pattern(regexp = "\\d+")
-    @Size(max=10)*/
+    @Size(max=10)
 
     private String verification;
-
-    @Override
-    public String toString() {
-        return "Login{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", verification='" + verification + '\'' +
-                '}';
-    }
 
     public String getUsername() {
         return username;
@@ -54,5 +45,14 @@ public class Login {
 
     public void setVerification(String verification) {
         this.verification = verification;
+    }
+
+    @Override
+    public String toString() {
+        return "Login{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", verification='" + verification + '\'' +
+                '}';
     }
 }
