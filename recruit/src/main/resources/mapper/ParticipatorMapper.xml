@@ -11,7 +11,7 @@
         value(#{stuId},#{stuName},#{stuSex},#{stuClass},#{stuNumber},#{stuTel},#{stuGroup},#{stuIntro})
     </insert>
     <select id="findTotalParticipator" resultType="int">
-        select count(*) from tb_participator
+        select count(*) from tb_participator where visibility=1
     </select>
 
     <resultMap id="participatorMap" type="participator">
@@ -23,17 +23,18 @@
         <result column="tel" property="stuTel"></result>
         <result column="classify" property="stuGroup"></result>
         <result column="introduction" property="stuIntro"></result>
+        <result column="time_table" property="schedule"></result>
     </resultMap>
     <select id="findParticipatorByPage" resultMap="participatorMap">
         select * from tb_participator  limit ${pageNum},${pageSize}
     </select>
     <select id="findParticipatorAll" resultMap="participatorMap">
-         select * from tb_participator ORDER BY realname,tel
+         select * from tb_participator where visibility>=0  order by convert(time_table using gbk) ,convert(classify using gbk), convert(realname using gbk)
     </select>
     <select id="findParticipatorByStuNum" resultType="int">
-        select count(*) from tb_participator where number=#{stuNumber} and realname=#{stuName}
+        select count(*) from tb_participator where  number=#{stuNumber} and realname=#{stuName}
     </select>
     <select id="findNoticeParticipator" resultType="noticeParticipator">
-        select id,realname stuName,gender stuSex,class stuClass,classify stuGroup,time_table schedule from tb_participator where visibility>=0  order by convert(time_table using gbk) ,convert(classify using gbk), convert(realname using gbk)  limit ${pageNum},${pageSize}
+        select id,realname stuName,gender stuSex,class stuClass,classify stuGroup,time_table schedule from tb_participator where visibility=1  order by convert(realname using gbk),convert(time_table using gbk) ,convert(classify using gbk)   limit ${pageNum},${pageSize}
     </select>
 </mapper>

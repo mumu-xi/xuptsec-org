@@ -37,6 +37,7 @@ public class Participator implements Serializable {
     private String stuGroup;
     @Size(max=512)
     private String stuIntro;
+    private String schedule;
 
     @Override
     public String toString() {
@@ -49,7 +50,16 @@ public class Participator implements Serializable {
                 ", stuTel='" + stuTel + '\'' +
                 ", stuGroup='" + stuGroup + '\'' +
                 ", stuIntro='" + stuIntro + '\'' +
+                ", schedule='" + schedule + '\'' +
                 '}';
+    }
+
+    public String getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(String schedule) {
+        this.schedule = schedule;
     }
 
     public String getStuId() {
