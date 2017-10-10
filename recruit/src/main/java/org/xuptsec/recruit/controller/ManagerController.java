@@ -54,6 +54,7 @@ public class ManagerController {
                 String verification = String.valueOf(new Random().nextInt(89999) + 10000);
               //  SendMessageUtil.sendMessage(stuTel, verification);
                 String key = MD5Util.md5("code" + stuTel);
+                //将验证码放入session 以便下次提交可以匹配验证码
                 session.setAttribute(key, verification);
 
 
@@ -90,10 +91,11 @@ public class ManagerController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public @ResponseBody
-    ResultLogin managerLogin(HttpServletResponse response, HttpServletRequest request, /*@RequestBody*/ @Valid Login login,BindingResult result) {
+    ResultLogin managerLogin(HttpServletResponse response, HttpServletRequest request, /*@RequestBody*/ @Valid Login login,/*表单验证框架，不能删除此参数*/BindingResult result) {
 
 
         ResultLogin resultLogin = new ResultLogin("请求失败", "false");
+        //表单验证
         if(result.hasErrors()){
             resultLogin.setMessage("表单验证失败");
             return resultLogin;
@@ -103,22 +105,29 @@ public class ManagerController {
             HttpSession session = request.getSession();
             Manager manager = managerService.managerLogin(login.getUsername(), login.getPassword());
             String stuTel = managerService.findManagerTelByUsername(login.getUsername());
-
+            //生成验证码的session键
             String key = MD5Util.md5("code" + stuTel);
             System.out.println("key: " + key);
+            //根据验证码session键取出验证码
             String codeValue = (String) session.getAttribute(key);
             System.out.println("登录 sessionId= " + session.getId());
             System.out.println(login.getVerification()+","+codeValue);
+            //对比验证码是否一致
             if (codeValue != null && codeValue.equals(login.getVerification())) {
+                //验证码一致后，从session中删除已验证过的验证码
             session.removeAttribute("code" + stuTel);
+            //若根据账号密码从数据库能找到用户，则开始登陆
             if (manager != null) {
                 session.setAttribute("manager", manager);
                 session.setMaxInactiveInterval(900);
+                //生成加密key，以便存入token
                 String tokenKey = MD5Util.md5(manager.getUsername() + manager.getPassword() + BASE64Util.toBASE64(manager.getSalt()));
                 String tokenValue = BASE64Util.toBASE64(manager.getUsername() + UUID.randomUUID() + manager.getPassword() + MD5Util.md5(System.currentTimeMillis() + ""));
+                //当base64超过64个长度，会自动插入\r|\n，会导致抛出异常，所以替换其为空
                 tokenValue = tokenValue.replaceAll("\r|\n", "");
-
+                //将token放入session
                 session.setAttribute(tokenKey, tokenValue);
+                //将token放入cookies发送至客户端
                 Cookie cookies = new Cookie("token", tokenValue);
                 cookies.setPath("/");
                 cookies.setMaxAge(900);
@@ -154,7 +163,7 @@ public class ManagerController {
     }
 
     /**
-     * 下载报名人全部信息表格（给管理员看）
+     * 将数据库所有用户信息导出表格，下载报名人全部信息表格（给管理员看）
      * @param response
      * @throws IOException
      */
