@@ -1,28 +1,24 @@
 package org.xuptsec.recruit.service.impl;
 
-import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.xuptsec.recruit.dao.ManagerMapper;
 import org.xuptsec.recruit.dao.ParticipatorMapper;
 import org.xuptsec.recruit.poji.Manager;
-import org.xuptsec.recruit.poji.Participator;
 import org.xuptsec.recruit.poji.ResultList;
+import org.xuptsec.recruit.poji.ResultPicture;
 import org.xuptsec.recruit.service.ManagerService;
-import org.xuptsec.recruit.service.ParticipatorService;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import org.xuptsec.recruit.utils.FastDFSUtils;
 
 /**
  * Created by mu on 2017/9/10.
  */
 @Service
 public class ManagerServiceImpl implements ManagerService {
+    @Value("${IMAGER_SERVER_BASE_URL}")
+    private String IMAGER_SERVER_BASE_URL;
     @Autowired
     private ManagerMapper managerMapper;
     @Autowired
@@ -63,6 +59,38 @@ public class ManagerServiceImpl implements ManagerService {
      */
     public String findManagerTelByUsername(String username) {
         return managerMapper.findManagerTelByUsername(username);
+    }
+    /**
+     * 上传图片，FastFDS分布式文件管理
+     * @param picFile
+     * @return
+     */
+    public ResultPicture uploadPic(MultipartFile picFile) {
+        ResultPicture resultPicture = new ResultPicture();
+        if(picFile.isEmpty()){
+            resultPicture.setMessage("图片为空");
+            resultPicture.setState("false");
+            return resultPicture;
+        }
+        try {
+            FastDFSUtils fastDFSUtils = new FastDFSUtils("classpath:fast.properties");
+            String originalFilename = picFile.getOriginalFilename();
+            String extName=originalFilename.substring(originalFilename.lastIndexOf(".")+1);
+            String picUrl =IMAGER_SERVER_BASE_URL+ fastDFSUtils.uploadFile(picFile.getBytes(), extName, null);
+            System.out.println(picUrl);
+
+            /*将picUrl地址存入数据库*/
+            //.........以后加吧
+
+            resultPicture.setPicUrl(picUrl);
+            resultPicture.setMessage("图片上传成功");
+            resultPicture.setState("true");
+        } catch (Exception e) {
+            resultPicture.setMessage("图片上传失败");
+            resultPicture.setState("false");
+            e.printStackTrace();
+        }
+        return resultPicture;
     }
 
 

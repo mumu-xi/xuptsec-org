@@ -5,11 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.xuptsec.recruit.poji.*;
 import org.xuptsec.recruit.service.ManagerService;
 import org.xuptsec.recruit.service.ParticipatorService;
 import org.xuptsec.recruit.utils.BASE64Util;
 import org.xuptsec.recruit.utils.MD5Util;
+import org.xuptsec.recruit.utils.SendMessageUtil;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -52,7 +54,7 @@ public class ManagerController {
             if (stuTel != "" || stuTel != null) {
                 //生成验证码
                 String verification = String.valueOf(new Random().nextInt(89999) + 10000);
-              //  SendMessageUtil.sendMessage(stuTel, verification);
+                SendMessageUtil.sendMessage(stuTel, verification);
                 String key = MD5Util.md5("code" + stuTel);
                 //将验证码放入session 以便下次提交可以匹配验证码
                 session.setAttribute(key, verification);
@@ -237,7 +239,10 @@ public class ManagerController {
         output.close();
     }
 
-
+    @RequestMapping("/uploadPic")
+    public @ResponseBody ResultPicture  uploadPic(MultipartFile uploadFile){
+        return managerService.uploadPic(uploadFile);
+    }
 
 
 }

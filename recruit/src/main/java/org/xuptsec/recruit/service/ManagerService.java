@@ -1,7 +1,9 @@
 package org.xuptsec.recruit.service;
 
+import org.springframework.web.multipart.MultipartFile;
 import org.xuptsec.recruit.poji.Manager;
 import org.xuptsec.recruit.poji.ResultList;
+import org.xuptsec.recruit.poji.ResultPicture;
 
 /**
  * Created by mu on 2017/9/10.
@@ -22,4 +24,10 @@ public interface ManagerService {
      */
     String findManagerTelByUsername(String username);
 
+    /**
+     * 上传图片，FastFDS分布式文件管理
+     * @param file
+     * @return
+     */
+    ResultPicture uploadPic(MultipartFile file);
 }

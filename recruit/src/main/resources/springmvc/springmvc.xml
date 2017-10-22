@@ -13,7 +13,7 @@
 
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
-
+    <context:property-placeholder location="classpath:fast.properties" ignore-unresolvable="true"/>
     <!-- JSP的显示ViewResolver -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
@@ -27,11 +27,12 @@
     <!-- 文件上传 -->
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <!-- 设置上传文件的最大尺寸为5MB -->
-        <property name="maxUploadSize">
-            <value>5242880</value>
-        </property>
+        <!-- 设定默认编码 -->
+        <property name="defaultEncoding" value="UTF-8"></property>
+        <!-- 设定文件上传的最大值5MB，5*1024*1024 -->
+        <property name="maxUploadSize" value="5242880"></property>
     </bean>
+
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">
             <list>
@@ -40,14 +41,14 @@
         </property>
     </bean>
 
-    <mvc:interceptors>
+  <!--  <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/api/manager/*"/>
             <mvc:exclude-mapping path="/api/manager/login"/>
             <mvc:exclude-mapping path="/api/manager/verification"/>
             <bean class="org.xuptsec.recruit.filter.LoginFilter"></bean>
         </mvc:interceptor>
-    </mvc:interceptors>
+    </mvc:interceptors>-->
     <!-- API 接口跨域配置 -->
     <mvc:cors>
         <mvc:mapping path="/api/**"
