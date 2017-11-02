@@ -68,7 +68,7 @@ class Index extends Component {
           browserHistory.push('/');
         } else {
           this.setState({ loading: false });
-          message.error('报名失败');
+          message.error(res.message);
         }
       }).catch((error) => {
         message.error(error);
@@ -91,21 +91,30 @@ class Index extends Component {
             {getFieldDecorator('stuName', {
               rules: [{
                 required: true, message: '请输入姓名',
-              }]
+              }, {
+                pattern: '[\\u4e00-\\u9fa5]+', message: '请勿输入除中文外的非法字符'
+              }],
+              validateTrigger: 'onBlur',
             })(<Input placeholder="请输入姓名" styleName="input" />)}
           </FormItem>
           <FormItem >
             {getFieldDecorator('stuSex', {
               rules: [{
-                required: true, message: '请输入姓别',
-              }]
-            })(<Input placeholder="请输入姓别" styleName="input" />)}
+                required: true, message: '请输入性别',
+              }, {
+                pattern: '[\\u4e00-\\u9fa5]+', message: '请勿输入除男/女外的非法字符'
+              }],
+              validateTrigger: 'onBlur',
+            })(<Input placeholder="请输入性别" styleName="input" />)}
           </FormItem>
           <FormItem >
             {getFieldDecorator('stuClass', {
               rules: [{
                 required: true, message: '请输入班级',
-              }]
+              }, {
+                pattern: '[\\d\\u4e00-\\u9fa5]+', message: '你确定这是你的班级嘛'
+              }],
+              validateTrigger: 'onBlur',
             })(<Input placeholder="请输入班级" styleName="input" />)}
           </FormItem>
           <FormItem >
@@ -131,6 +140,8 @@ class Index extends Component {
             {getFieldDecorator('stuGroup', {
               rules: [{
                 required: true, message: '请选择',
+              }, {
+                pattern: '[\\u4e00-\\u9fa5]+', message: '选择填写正确的方向噢'
               }]
             })(<Input placeholder="面试方向（安全组/开发组/待定)" styleName="input" />)}
           </FormItem>
@@ -141,11 +152,10 @@ class Index extends Component {
               }]
             })(<TextArea rows={7} placeholder="自我介绍" styleName="textarea" />)}
           </FormItem>
-          <Button type="primary" htmlType="submit" styleName="signUpBtn">
+          <Button type="primary" htmlType="submit" styleName="signUpBtn" disabled>
              报名
           </Button>
         </Form>
-
       </div>
     );
   }

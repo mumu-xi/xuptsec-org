@@ -51,35 +51,41 @@ class Index extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <div styleName="wrapper">
-        <div styleName="loginTitle">XUPT SEC</div>
-        <Form onSubmit={this.handleSubmit} styleName="loginForm">
-          <FormItem>
-            {this.props.form.getFieldDecorator('username', {
-              rules: [
-                { required: true, message: '输入用户名' },
-                { min: 6, max: 10, message: '请输入6~10位用户名' }
-              ],
-              validateTrigger: 'onBlur',
-            })(
-              <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="username" />
-            )}
-          </FormItem>
-          <FormItem>
-            {this.props.form.getFieldDecorator('password', {
-              rules: [
-                { required: true, message: '输入密码' }
-              ],
-              validateTrigger: 'onBlur',
-            })(
-              <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="Password" />
-            )}
-          </FormItem>
-          <Button type="primary" htmlType="submit" styleName="loginBtn">
-            登录
-          </Button>
-        </Form>
+      <div>
+        <div styleName="loginHeader">
+          <Icon type="arrow-left" style={{ fontSize: 22, color: '#FFF', margin: '10px 0 0 20px' }} />
+        </div>
+        <div styleName="wrapper">
+          <div styleName="loginTitle">XUPT SEC</div>
+          <Form onSubmit={this.handleSubmit} styleName="loginForm">
+            <FormItem>
+              {this.props.form.getFieldDecorator('username', {
+                rules: [
+                  { required: true, message: '输入用户名' },
+                  { min: 6, max: 10, message: '请输入6~10位用户名' }
+                ],
+                validateTrigger: 'onBlur',
+              })(
+                <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="username" />
+              )}
+            </FormItem>
+            <FormItem>
+              {this.props.form.getFieldDecorator('password', {
+                rules: [
+                  { required: true, message: '输入密码' }
+                ],
+                validateTrigger: 'onBlur',
+              })(
+                <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="Password" />
+              )}
+            </FormItem>
+            <Button type="primary" htmlType="submit" styleName="loginBtn">
+              登录
+            </Button>
+          </Form>
+        </div>
       </div>
+
     );
   }
 }

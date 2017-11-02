@@ -8,6 +8,10 @@
   justify-content: center;
   flex-direction: column;
 }
+.loginHeader{
+  height: 6vh;
+  background: #404040;
+}
 .loginTitle {
   font-size: 60px;
   color: #108ee9;

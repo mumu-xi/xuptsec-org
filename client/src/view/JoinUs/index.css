@@ -193,3 +193,10 @@
   width: 275px;
   height: 275px;
 }
+.spinWrapper {
+  margin: 0 auto;
+  width: 50;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}

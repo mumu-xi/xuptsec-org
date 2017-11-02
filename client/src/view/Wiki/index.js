@@ -7,10 +7,9 @@ const { Content } = Layout;
 
 export default class extends Component {
   render() {
-    const route = this.props.children.props.route.path;
     return (
       <div>
-        <Header route={route} type="mainHeader" />
+        <Header type="wikiHeader" />
         <Layout>
           <Content>
             {this.props.children || <div />}

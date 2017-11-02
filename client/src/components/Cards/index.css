@@ -1,0 +1,64 @@
+.container {
+  margin: 0 auto;
+  min-height: 74vh;
+}
+.node{
+  border-bottom: 1px solid #d3d7d9;
+  padding-bottom: 25px;
+  margin-bottom: 25px;
+}
+.node h1{
+  position: relative;
+  margin: 0 0 15px;
+}
+.node h1::before{
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background-color: #adff2f;
+}
+.node h1 a{
+  display: block;
+  font-size: 24px;
+  color: #105082;
+  text-decoration: none;
+}
+.nodeHeader{
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: #ccc;
+  padding-bottom: 5px;
+  border-bottom: 1px dashed #ddd;
+
+}
+.nodeHeader span {
+  padding-right: 8px;
+}
+.nodeHeader span i{
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #adff2f;
+}
+.node p{
+  font-size: 16px;
+  line-height: 30px;
+  margin-bottom: 25px;
+}
+.more{
+  text-align: right;
+}
+.more a{
+  background-color: #105082;
+  color: #fff;
+  padding: 5px 10px;
+  line-height: 18px;
+  border-radius: 3px;
+}
+.nodata {
+  height: 74vh;
+  text-align: center;
+}

@@ -80,7 +80,11 @@ module.exports = {
       { test: /\.sass$/, loader: `${stylesheetsLoader}'!sass?indentedSyntax=sass` },
       { test: /\.less$/, loader: `${stylesheetsLoader}'!less` },
       { test: /\.html$/, loader: 'html-loader' },
-      { test: /\.(png|jpg|gif|mp4|ogg|svg|woff|woff2)$/i, loader: 'url-loader?limit=20000' }
+      { test: /\.(png|jpg|gif|mp4|ogg|svg|woff|woff2)$/i,
+        use: [
+            { loader: 'url-loader', options: { limit: 10000 } }
+        ]
+      }
     ]
   }
 };
